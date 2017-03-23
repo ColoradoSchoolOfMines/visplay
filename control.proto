@@ -1,0 +1,108 @@
+syntax = "proto3";
+
+message PollHost {
+	uint32 max_events = 1;
+	uint32 timeout = 2;
+	repeated Command commands = 3;
+	repeated Request requests = 4;
+}
+
+enum Request {
+	FREE_TASK_ID = 0;
+	ERROR = 1;
+}
+
+message Command {
+	oneof command {
+		ComAttachContentBy attach_content_by = 1;
+		ComAttachContentShell attach_content_shell = 2;
+		ComAttachSidebarText attach_sidebar_text = 3;
+		ComTaskSet task_set = 4;
+		ComGlobalSet global_set = 5;
+	};
+}
+
+message ComAttachContentBy {
+	uint32 id = 1;
+	uint32 task_id = 2;
+	oneof by {
+		string name = 3;
+		string class = 4;
+		string role = 5;
+		uint32 window_id = 6;
+		uint32 pid = 7;
+	};
+}
+
+message ComAttachContentShell {
+	uint32 contentid = 1;
+	uint32 task_id = 2;
+	string shell_path = 3;
+	string shell_command = 4;
+}
+
+message ComAttachSidebarText {
+	string text = 1;
+}
+
+message ComTaskSet {
+	enum Param {
+		SIDEBAR_RATIO = 0;
+		TIMEUP = 1;
+		EXIT_ON_DROP = 2;
+		IDLE_TICK_EVERY = 3;
+		PERSIST = 4;
+	}
+
+	Param what = 1;
+	uint32 task = 2;
+	bool enabled = 3;
+	float fval = 4;
+	uint32 ival = 5;
+	string strval = 6;
+}
+
+message ComGlobalSet {
+	enum Param {
+		DEFAULT_TASK = 0;
+	}
+
+	Param what = 1;
+	bool enabled = 2;
+	float fval = 3;
+	uint32 ival = 4;
+	string strval = 5;
+}
+
+message HostResponse {
+	repeated EventSignal events = 1;
+	repeated ResponseValue responses = 2;
+}
+
+enum Event {
+	PRE_START = 0;
+	POST_START = 1;
+	REQUESTED = 2;
+	PRE_HOIST = 3;
+	POST_HOIST = 4;
+	TIMEUP = 5;
+	PRE_DROP = 6;
+	POST_DROP  = 7;
+	IDLE_TICK = 8;
+	PRE_EXIT = 9;
+	POST_EXIT = 10;
+}
+
+message EventSignal {
+	Event type = 1;
+	uint32 task_id = 2;
+	uint32 content_id = 3;
+	uint32 window_id = 4;
+}
+
+message ResponseValue {
+	Request request = 1;
+	float fval = 2;
+	uint32 ival = 3;
+	string strval = 4;
+}

@@ -1,0 +1,12 @@
+[package]
+name = "visplay-host"
+version = "0.1.0"
+authors = ["Sam Sartor <me@samsartor.com>"]
+
+[dependencies]
+clap = "*"
+protobuf = "*"
+log = "*"
+zombie = "0.0.4"
+wtftw_core = { git = "https://github.com/doctorocclusion/wtftw-lib" }
+wtftw_xlib = { git = "https://github.com/doctorocclusion/wtftw-lib" }
