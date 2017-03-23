@@ -35,9 +35,10 @@ pub fn main() {
 
     debug!("Size of keyhandlers after config.generaluration: {}", config.internal.key_handlers.len());
 
-    let enter_key = KeyCommand::new(window_system.get_keycode_from_string("Return"), NONEMASK);
-    let x_key = KeyCommand::new(window_system.get_keycode_from_string("X"), NONEMASK);
-    window_system.grab_keys(vec![enter_key, x_key]);
+    let enter_key = KeyCommand::new(window_system.get_keycode_from_string("Return"), MOD1MASK);
+    let x_key = KeyCommand::new(window_system.get_keycode_from_string("x"), MOD1MASK);
+    let q_key = KeyCommand::new(window_system.get_keycode_from_string("q"), MOD1MASK);
+    window_system.grab_keys(vec![enter_key, x_key, q_key]);
 
     for (command, _) in config.internal.key_handlers.iter() {
         window_system.grab_keys(vec!(command.clone()));
@@ -50,7 +51,7 @@ pub fn main() {
     window_manager = (*config.internal.startup_hook)(window_manager, window_system.clone(), &config);
 
     // Enter the event loop and just listen for events
-    while window_manager.running {
+    'event_loop: while window_manager.running {
         let event = window_system.clone().get_event();
         match event {
             WindowSystemEvent::ClientMessageEvent(_, _, _, _) => {
@@ -109,8 +110,12 @@ pub fn main() {
                 }
             },
             WindowSystemEvent::KeyPressed(_, key) => {
-                if key == enter_key { Command::new("urxvt").spawn().unwrap(); }
-                else if key == x_key { window_manager = window_manager.kill_window(window_system.as_ref()) }
+                match key {
+                    _ if key == enter_key => { Command::new("urxvt").spawn().unwrap(); }
+                    _ if key == x_key => window_manager = window_manager.kill_window(window_system.as_ref()),
+                    _ if key == q_key => break 'event_loop,
+                    _ => ()
+                } 
             },
             _ => ()
         };
