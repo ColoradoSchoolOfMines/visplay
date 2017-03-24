@@ -7,6 +7,8 @@ authors = ["Sam Sartor <me@samsartor.com>"]
 clap = "*"
 protobuf = "*"
 log = "*"
+simplelog = "*"
 zombie = "0.0.4"
-wtftw_core = { git = "https://github.com/doctorocclusion/wtftw-lib" }
-wtftw_xlib = { git = "https://github.com/doctorocclusion/wtftw-lib" }
+x11-dl = "*"
+libc = "*"
+lazy_static = "*"
