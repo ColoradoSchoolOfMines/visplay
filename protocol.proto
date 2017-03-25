@@ -10,6 +10,14 @@ message HandshakeFromClient {
 	bytes signature = 1;
 }
 
+message Command {
+
+}
+
+message Response {
+
+}
+
 message Sequence {
 	// a sequence name used to identify it later
 	string name = 1;
