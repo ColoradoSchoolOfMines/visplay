@@ -4,11 +4,19 @@ version = "0.1.0"
 authors = ["Sam Sartor <me@samsartor.com>"]
 
 [dependencies]
-clap = "*"
-protobuf = "*"
-log = "*"
+clap = "~2"
+
+protobuf = "~1"
+
+log = "~0.3"
 simplelog = "*"
+
 zombie = "0.0.4"
-x11-dl = "*"
+x11-dl = "~2"
 libc = "*"
+
 lazy_static = "*"
+
+serde = "~0.9"
+serde_derive = "~0.9"
+serde_json = "~0.9"

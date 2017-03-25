@@ -1,0 +1,6 @@
+{
+	"keys": [ "" ],
+	"log_level": 1,
+	"log_file": ".visplay_log.txt",
+	"require_local_auth": true,
+}

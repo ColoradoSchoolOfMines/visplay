@@ -88,6 +88,7 @@ impl RootStructure {
                 return Err(RootStructureAlreadySetup);
             }
 
+            trace!("Initializing global data");
             let mut global = GLOBAL_DATA.lock().unwrap();
             replace(&mut *global, Some(GlobalData {
                 wm_detected: false,
@@ -95,6 +96,7 @@ impl RootStructure {
         }
 
         unsafe {
+            debug!("Opening display...");
             let display = (xlib.XOpenDisplay)(null());
             if display == null_mut() {
                 error!("Could not open dipslay");
@@ -130,10 +132,12 @@ impl RootStructure {
         info!("Starting teardown...");
 
         unsafe { 
+            debug!("Closing display...");
             (self.xlib.XCloseDisplay)(self.display); 
             (self.xlib.XSync)(self.display, false as i32);
         }
 
+        trace!("Deleting global data");
         let mut global = GLOBAL_DATA.lock().unwrap();
         replace(&mut *global, None);
 
@@ -145,6 +149,7 @@ impl RootStructure {
 
         unsafe {
             (self.xlib.XSetErrorHandler)(Some(detect_wm));
+            debug!("Selecting substructure redirection...");
             (self.xlib.XSelectInput)(self.display, self.root, SubstructureRedirectMask | SubstructureNotifyMask);
             (self.xlib.XSync)(self.display, false as i32);
 
