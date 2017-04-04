@@ -21,8 +21,8 @@ message Response {
 message Sequence {
 	// a sequence name used to identify it later
 	string name = 1;
-	repeated Task = 2;
-	repeated Trigger = 3;
+	repeated Task tasks = 2;
+	repeated Trigger triggers = 3;
 }
 
 message Trigger {
@@ -56,7 +56,7 @@ message TaskShowText {
 	// a client-assigned content id (unique to the current Sequence)
 	uint32 content_id = 1;
 
-	string text = 1;
+	string text = 2;
 }
 
 message TaskMatchWindow {
@@ -87,10 +87,10 @@ message TaskPlaceContent {
 }
 
 enum Side {
-	TOP = 1,
-	BOTTOM = 2,
-	LEFT = 3,
-	RIGHT = 4,
+	TOP = 0;
+	BOTTOM = 1;
+	LEFT = 2;
+	RIGHT = 3;
 }
 
 message LocationSplit {

@@ -18,6 +18,8 @@ extern crate serde;
 extern crate serde_derive;
 extern crate serde_json;
 
+extern crate openssl;
+
 mod xsystem;
 use xsystem::*;
 
@@ -25,6 +27,8 @@ mod control;
 
 mod config;
 use config::Config;
+
+mod auth;
 
 use std::rc::Rc;
 use std::fs::File;
@@ -88,9 +92,9 @@ fn main() {
         simplelog::Config::default()
     ).unwrap());
     // log to file if in config (using the log level in the config)
-    if let Some(file) = config.log_file {
+    if let &Some(ref file) = &config.log_file {
         loggers.push(WriteLogger::new(
-            log_level_to_enum(config.log_level.unwrap_or(0)),
+            log_level_to_enum(config.log_level),
             simplelog::Config::default(),
             File::create(file).unwrap()));
     }
@@ -102,9 +106,15 @@ fn main() {
     let xlib = Rc::new(Xlib::open().expect("Could not load Xlib"));
 
     // start window manager
-    let mut structure = RootStructure::setup(xlib).expect("Could not initialize xsystem");
+    //let mut structure = RootStructure::setup(xlib).expect("Could not initialize xsystem");
+
+    // load auth
+    let auth = auth::Auth::from_cfg(&config);
+    info!("Loaded {} rsa key(s)", auth.keys.len());
+
+    // event loop
     loop {
-        structure.poll_event(); // TODO: handle events
+        //structure.poll_event(); // TODO: handle events
     }
-    structure.teardown();
+    //structure.teardown();
 }
