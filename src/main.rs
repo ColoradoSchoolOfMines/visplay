@@ -20,6 +20,9 @@ extern crate serde_json;
 
 extern crate openssl;
 
+extern crate mio;
+extern crate byteorder;
+
 mod xsystem;
 use xsystem::*;
 
@@ -65,6 +68,10 @@ fn main() {
                 .long("config")
                 .takes_value(true)
                 .help("Specify a JSON config file"))
+            .arg(Arg::with_name("export_defaults")
+                .long("export_defaults")
+                .takes_value(true)
+                .help("Save a default config into a file"))
         .get_matches();
 
     // load config
@@ -83,6 +90,12 @@ fn main() {
         (0, q) => 0 - q as i32,
         _ => 0, // Illegal state
     };
+
+    // save default config if requested
+    if let Some(exppath) = args.value_of("export_defaults") {
+        let mut file = File::create(exppath).expect(&format!("Error opening new config file \"{}\"", exppath));
+        serde_json::to_writer(&mut file, &Config::default()).expect("Failed to store config in file");
+    }
 
     // create list of loggers
     let mut loggers: Vec<Box<SharedLogger>> = Vec::new();

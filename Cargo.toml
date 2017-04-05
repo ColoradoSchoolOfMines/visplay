@@ -22,3 +22,6 @@ serde_derive = "~0.9"
 serde_json = "~0.9"
 
 openssl = "~0.9"
+
+mio = "~0.6"
+byteorder = "~1"

@@ -2,7 +2,7 @@ syntax = "proto3";
 
 message HandshakeFromHost {
 	// client should sign this data with key and return the signature in HandshakeFromClient
-	bytes urand = 1;
+	bytes tosign = 1;
 }
 
 message HandshakeFromClient {
