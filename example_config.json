@@ -1,7 +1,5 @@
 {
-	"keys": [ "public_key.pem" ],
+	"keys": [ "1234" ],
 	"log_level": 1,
-	"log_file": ".visplay_log.txt",
-	"require_local_auth": true,
-	"require_remote_auth": true
+	"log_file": ".visplay_log.txt"
 }

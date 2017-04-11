@@ -1,6 +1,7 @@
-extern crate clap;
+#![feature(plugin)]
+#![plugin(rocket_codegen)]
 
-extern crate protobuf;
+extern crate clap;
 
 #[macro_use]
 extern crate log;
@@ -18,23 +19,25 @@ extern crate serde;
 extern crate serde_derive;
 extern crate serde_json;
 
-extern crate openssl;
-
-extern crate mio;
-extern crate byteorder;
+extern crate rocket;
+extern crate rocket_codegen;
+extern crate rocket_contrib;
 
 mod xsystem;
 use xsystem::*;
 
-mod control;
-
 mod config;
 use config::Config;
 
-mod auth;
+mod control;
+
+mod api;
+mod admin;
 
 use std::rc::Rc;
 use std::fs::File;
+use std::cell::RefCell;
+use std::mem;
 
 use clap::{App, Arg};
 use simplelog::{SharedLogger, CombinedLogger, WriteLogger, TermLogger, LogLevelFilter};
@@ -49,7 +52,6 @@ fn log_level_to_enum(level: i32) -> LogLevelFilter {
         _ => LogLevelFilter::Trace,
     }
 }
-
 
 fn main() {
     // setup clap command-line stuff
@@ -118,16 +120,5 @@ fn main() {
     // load xlib dll
     let xlib = Rc::new(Xlib::open().expect("Could not load Xlib"));
 
-    // start window manager
-    //let mut structure = RootStructure::setup(xlib).expect("Could not initialize xsystem");
 
-    // load auth
-    let auth = auth::Auth::from_cfg(&config);
-    info!("Loaded {} rsa key(s)", auth.keys.len());
-
-    // event loop
-    loop {
-        //structure.poll_event(); // TODO: handle events
-    }
-    //structure.teardown();
 }

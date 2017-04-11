@@ -6,8 +6,6 @@ authors = ["Sam Sartor <me@samsartor.com>"]
 [dependencies]
 clap = "~2"
 
-protobuf = "~1"
-
 log = "~0.3"
 simplelog = "*"
 
@@ -21,7 +19,6 @@ serde = "~0.9"
 serde_derive = "~0.9"
 serde_json = "~0.9"
 
-openssl = "~0.9"
-
-mio = "~0.6"
-byteorder = "~1"
+rocket = "~0.2"
+rocket_codegen = "~0.2"
+rocket_contrib = "~0.2"
