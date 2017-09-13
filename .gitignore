@@ -1,5 +1,0 @@
-target
-
-# in case of people being stupid with the example config
-*.pem
-\.visplay_log\.txt
