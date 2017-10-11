@@ -8,4 +8,7 @@ setup(name='cisplay',
       author_email='Not yet',
       license='MIT',
       packages=['visplay'],
+      install_requires=[
+            'python-mpv',
+      ],
       zip_safe=False)
