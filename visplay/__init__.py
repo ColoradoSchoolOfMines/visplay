@@ -1,8 +1,10 @@
 'visplay: from os import listdir'
 
-from os import listdir
-from os import path
+from queue import Queue
 import mpv
+import configparser
+
+messages = Queue()
 
 
 def my_log(loglevel, component, message):
@@ -10,37 +12,61 @@ def my_log(loglevel, component, message):
     print('[{}] {}: {}'.format(loglevel, component, message))
 
 
+player = mpv.MPV(log_handler=my_log, ytdl=True, input_vo_keyboard=True)
+
+
+@player.on_key_press('q')
+def my_q_binding():
+    print("PressedQ")
+    player.quit()
+    messages.put("quit")
+
+
 def main():
-    'main: main entrypoint for program when run standalone'
-#     player = mpv.MPV(log_handler=my_log, ytdl=True,
-#                input_default_bindings=True, input_vo_keyboard=True)
+    '''main: main entrypoint for program when run standalone'''
 
     still_running = True
-
-    video_path = path.expanduser('~/Videos/visplay')
+    config = configparser.ConfigParser()
+    config.read('video.ini')
 
     while still_running:
-        print('Looking for videos in %s' % (video_path))
-        video_map = find_videos(video_path)
-        print('Found %d videos!' % (len(video_map)))
+        # Find all videos
+        allVideos = {}
+        for vid in config.sections():
+            video = config[vid]
+            mediaType = ''
 
-        if not video_map:
+            # Find the type of the video. Fail if not found
+            print(vid)
+            if 'type' in video:
+                mediaType = video['type']
+            else:
+                print("Missing type in ini file")
+                break
+
+            # Find either the local or url of the video. Fail if not found
+            if 'loc' in video:
+                # TODO get better quality stuff by default
+                allVideos[vid] = {}
+                allVideos[vid]['loc'] = video['loc']
+            else:
+                print("Missing url or local in ini file")
+                break
+
+            allVideos[vid]['type'] = mediaType
+
+        if not allVideos:
             print("Exiting...")
             exit(1)
 
-        player = mpv.MPV(log_handler=my_log)
-    #     player = mpv.MPV()
         player.fullscreen = True
 
-        for video in video_map:
-            player.play(video)
+        # Play through all videos found in the ini file
+        for video in allVideos:
+            player.play(allVideos[video]['loc'])
             player.wait_for_playback()
-
-
-def find_videos(video_path):
-    'findVideos: finds all video files in video path'
-    return [video_path + '/' + file for file in listdir(video_path)]
-    # return map(lambda a: video_path + "/" + a, listdir(video_path))
+            if not messages.empty() and messages.get_nowait() == "quit":
+                exit(0)
 
 
 if __name__ == "__main__":

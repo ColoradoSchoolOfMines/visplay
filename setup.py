@@ -10,5 +10,6 @@ setup(name='cisplay',
       packages=['visplay'],
       install_requires=[
             'python-mpv',
+            'configparser',
       ],
       zip_safe=False)
