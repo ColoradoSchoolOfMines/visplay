@@ -4,7 +4,7 @@
 from queue import Queue
 # import rest
 import media
-import sources
+from sources import LocalSource
 
 
 def main():
@@ -14,7 +14,7 @@ def main():
 
     # A list of sources following a basic interface. See sources.py
     sourceList = {}
-    sourceList["local"] = sources.localSource()
+    sourceList["local"] = LocalSource()
 
     # TODO Don't use local for everything
     assets = sourceList["local"].get_assets(0)
