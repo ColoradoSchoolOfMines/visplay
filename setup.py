@@ -1,6 +1,6 @@
 from setuptools import setup
 
-setup(name='cisplay',
+setup(name='visplay',
       version='0.1',
       description='Visplay',
       url='https://github.com/ColoradoSchoolOfMines/visplay',
@@ -11,5 +11,6 @@ setup(name='cisplay',
       install_requires=[
             'python-mpv',
             'configparser',
+            'pyyaml',
       ],
       zip_safe=False)

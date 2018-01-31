@@ -1,73 +1,50 @@
 'visplay: from os import listdir'
 
+# import threading
 from queue import Queue
-import mpv
-import configparser
-
-messages = Queue()
-
-
-def my_log(loglevel, component, message):
-    'my_log; acts as the log handler for the mpv object'
-    print('[{}] {}: {}'.format(loglevel, component, message))
-
-
-player = mpv.MPV(log_handler=my_log, ytdl=True, input_vo_keyboard=True)
-
-
-@player.on_key_press('q')
-def my_q_binding():
-    print("PressedQ")
-    player.quit()
-    messages.put("quit")
+# import rest
+import media
+import sources
 
 
 def main():
     '''main: main entrypoint for program when run standalone'''
+    # There are multiple threads so this allows them to communicate
+    messages = Queue()
 
-    still_running = True
-    config = configparser.ConfigParser()
-    config.read('video.ini')
+    # A list of sources following a basic interface. See sources.py
+    sourceList = {}
+    sourceList["local"] = sources.localSource()
 
-    while still_running:
-        # Find all videos
-        allVideos = {}
-        for vid in config.sections():
-            video = config[vid]
-            mediaType = ''
+    # TODO Don't use local for everything
+    assets = sourceList["local"]["getAsset"](0)
+    playlist = sourceList["local"]["getPlaylist"](0)
 
-            # Find the type of the video. Fail if not found
-            print(vid)
-            if 'type' in video:
-                mediaType = video['type']
-            else:
-                print("Missing type in ini file")
-                break
+    # Start mpv
+    media.findAndPlay(messages, playableGenerator(assets, playlist, messages))
 
-            # Find either the local or url of the video. Fail if not found
-            if 'loc' in video:
-                # TODO get better quality stuff by default
-                allVideos[vid] = {}
-                allVideos[vid]['loc'] = video['loc']
-            else:
-                print("Missing url or local in ini file")
-                break
 
-            allVideos[vid]['type'] = mediaType
-
-        if not allVideos:
-            print("Exiting...")
-            exit(1)
-
-        player.fullscreen = True
-
-        # Play through all videos found in the ini file
-        for video in allVideos:
-            player.play(allVideos[video]['loc'])
-            player.wait_for_playback()
-            if not messages.empty() and messages.get_nowait() == "quit":
-                exit(0)
+# Returns a generator that will infinitely return new things to play
+def playableGenerator(source, playlist, messages):
+    running = True
+    while running:
+        for playable in playlist["playlist"]:
+            # if a message is sent telling this to reload, do it
+            if not messages.empty():
+                message = messages.get_nowait()
+                if "source" in message:
+                    source = message["source"]
+                elif "playlist" in message:
+                    playlist = message["playlist"]
+                    break
+                else:
+                    # The message was for someone else
+                    messages.put(message)
+            # get the asset pointed to by playlist
+            yield source["assets"][playable]
 
 
 if __name__ == "__main__":
     main()
+
+
