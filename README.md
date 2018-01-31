@@ -6,3 +6,9 @@ Stream videos and open media files using a mpv implementation.
 
 # Documentation
 Under Construction
+
+# Dependencies
+MPV
+
+For python dependecies run:
+pip3 . install --user 
