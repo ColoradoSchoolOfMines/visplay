@@ -45,8 +45,6 @@ def main():
         print('Error parsing arguments:', e)
         return
 
-    print(args)
-
     # There are multiple threads so this allows them to communicate
     messages = Queue()
 
