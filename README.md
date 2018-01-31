@@ -23,3 +23,9 @@ Run:
 then you can just run `visplay`.
 
 If you have already installed, add `--update` to the `pip install` command.
+
+## Developing Locally
+Run:
+
+    pip install -e . --user
+    python3 visplay/__main__.py
