@@ -8,21 +8,18 @@ import requests
 
 class LocalSource:
 
-    def __init__(self):
+    def __init__(self, path):
         self.survive = True
+        self.path = path
+        self.assets = self.get_local_yaml('assets', 0)
+        self.playlist = self.get_local_yaml('playlist', 0)
 
-    def get_assets(self, timeStamp):
-        return self.getLocalYaml('assets', timeStamp)
-
-    def get_playlist(self, timeStamp):
-        return self.getLocalYaml('playlist', timeStamp)
-
-    def getLocalYaml(self, path, timeStamp):
+    def get_local_yaml(self, path, timeStamp):
         try:
-            localTimeStamp = os.path.getmtime(path + '.yaml')
-            with open(path + '.yaml') as assets:
+            localTimeStamp = os.path.getmtime(self.path + path + '.yaml')
+            with open(self.path + path + '.yaml') as assets:
                 if localTimeStamp > timeStamp:
-                    return {path: yaml.load(assets)}
+                    return yaml.load(assets)
                 else:
                     return {'error': 'Old'}
         except OSError:
@@ -34,7 +31,7 @@ class HTTPSource:
     def __init__(self, urls):
 
         with requests.get(urls['assets'], verify=False) as remote_file:
-            self.asset_yaml = yaml.load(remote_file.content)
+            self.assets = yaml.load(remote_file.content)
 
         with requests.get(urls['playlist'], verify=False) as remote_file:
-            self.playlist_yaml = yaml.load(remote_file.content)
+            self.playlist = yaml.load(remote_file.content)

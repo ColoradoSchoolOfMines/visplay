@@ -3,28 +3,22 @@ from os import environ, path, makedirs
 from queue import Queue
 from argparse import ArgumentParser
 
-from visplay import media
-from visplay.sources import LocalSource
+from visplay import media, setupConfig
+from visplay.sources import LocalSource, HTTPSource
 
 
 def playable_generator(source, playlist, messages):
     """Return a generator that will infinitely return new things to play."""
     running = True
     while running:
-        for playable in playlist['playlist']:
+        print(playlist)
+        for playable in playlist:
             # if a message is sent telling this to reload, do it
             if not messages.empty():
                 message = messages.get_nowait()
                 if 'source' in message:
                     source = message['source']
-                elif 'playlist' in message:
-                    playlist = message['playlist']
-                    break
-                else:
-                    # The message was for someone else
-                    messages.put(message)
-            # get the asset pointed to by playlist
-            yield source['assets'][playable]
+            yield source[playable]
 
 
 def main():
@@ -49,12 +43,11 @@ def main():
     messages = Queue()
 
     # A list of sources following a basic interface. See sources.py
-    sourceList = {}
-    sourceList['local'] = LocalSource()
+    constructors = {'local': LocalSource, 'http': HTTPSource}
+    sources = setupConfig.get_source_list(args.config, constructors)
 
-    # TODO Don't use local for everything
-    assets = sourceList['local'].get_assets(0)
-    playlist = sourceList['local'].get_playlist(0)
+    assets = sources[0].assets
+    playlist = sources[0].playlist
 
     # Start mpv
     media.findAndPlay(messages, playable_generator(assets, playlist, messages))
