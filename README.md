@@ -2,15 +2,24 @@
 This project's goal is to make the TV's in the foyer of the buildings of Mines
 display media of ACM's projects. The project uses MPV and python.
 
-# Features
+## Features
 Stream videos and open media files using an `mpv` implementation.
 
-# Documentation
+## Documentation
 Under Construction
 
-# Dependencies
+## Dependencies
 MPV
 
 For python dependecies run:
 
     pip3 . install --user
+
+## Installation
+Run:
+
+    pip install . --user
+
+then you can just run `visplay`.
+
+If you have already installed, add `--update` to the `pip install` command.

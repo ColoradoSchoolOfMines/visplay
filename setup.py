@@ -13,4 +13,15 @@ setup(name='visplay',
           'configparser',
           'pyyaml',
       ],
-      zip_safe=False)
+      zip_safe=False,
+
+      # To provide executable scripts, use entry points in preference to the
+      # "scripts" keyword. Entry points provide cross-platform support and
+      # allow pip to create the appropriate form of executable for the target
+      # platform.
+      entry_points={
+          'console_scripts': [
+              'visplay=visplay.__main__:main',
+          ],
+      },
+)
