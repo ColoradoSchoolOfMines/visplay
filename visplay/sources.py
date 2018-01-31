@@ -4,12 +4,6 @@ import yaml
 # Every source needs to say whether the files it gets survive after an error,
 # how to get an asset file, and how to get a playlist file.
 
-
-# Local Source
-def localSource():
-    return LocalSource()
-
-
 class LocalSource:
 
     def __init__(self):
