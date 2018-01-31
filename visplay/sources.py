@@ -1,8 +1,10 @@
 import os
 import yaml
+import requests
 
 # Every source needs to say whether the files it gets survive after an error,
 # how to get an asset file, and how to get a playlist file.
+
 
 class LocalSource:
 
@@ -25,3 +27,14 @@ class LocalSource:
                     return {'error': 'Old'}
         except OSError:
             return {'error': 'An error parsing the yaml'}
+
+
+class HTTPSource:
+
+    def __init__(self, urls):
+
+        with requests.get(urls['assets'], verify=False) as remote_file:
+            self.asset_yaml = yaml.load(remote_file.content)
+
+        with requests.get(urls['playlist'], verify=False) as remote_file:
+            self.playlist_yaml = yaml.load(remote_file.content)
