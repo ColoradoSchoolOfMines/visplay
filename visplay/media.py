@@ -5,7 +5,7 @@ messengerDic = {}
 
 
 def my_log(loglevel, component, message):
-    'my_log; acts as the log handler for the mpv object'
+    """Acts as the log handler for the mpv object"""
     print('[{}] {}: {}'.format(loglevel, component, message))
 
 
@@ -24,7 +24,7 @@ player = mpv.MPV(log_handler=my_log, input_default_bindings=True, ytdl=True,
 @player.on_key_press('q')
 def my_q_binding():
     player.quit()
-    messengerDic["queue"].put("quit")
+    messengerDic['queue'].put('quit')
 
 
 # Pause on p
@@ -35,7 +35,7 @@ def my_p_binding():
 
 def findAndPlay(messages, generator):
     # Pass the keypress functions the queue
-    messengerDic["queue"] = messages
+    messengerDic['queue'] = messages
 
     still_running = True
 
@@ -46,5 +46,5 @@ def findAndPlay(messages, generator):
         for video in generator:
             player.play(video)
             player.wait_for_playback()
-            if not messages.empty() and messages.get_nowait() == "quit":
+            if not messages.empty() and messages.get_nowait() == 'quit':
                 exit(0)
