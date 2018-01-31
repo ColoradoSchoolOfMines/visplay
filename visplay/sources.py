@@ -11,7 +11,6 @@ def localSource():
 
 
 class LocalSource:
-    survive = True
 
     def __init__(self):
         self.survive = True
