@@ -105,3 +105,10 @@ venv.bak/
 .mypy_cache/
 
 # End of https://www.gitignore.io/api/python
+
+
+
+
+# visplay config files
+assets.yaml
+playlist.yaml
