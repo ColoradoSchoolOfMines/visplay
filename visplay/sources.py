@@ -7,27 +7,28 @@ import yaml
 
 # Local Source
 def localSource():
-    source = {"survive": True,
-              "getAsset": getAssetList,
-              "getPlaylist": getplaylistList}
-    return source
+    return LocalSource()
 
 
-def getAssetList(timeStamp):
-    return getLocalYaml("assets", timeStamp)
+class LocalSource:
+    survive = True
 
+    def __init__(self):
+        self.survive = True
 
-def getplaylistList(timeStamp):
-    return getLocalYaml("playlist", timeStamp)
+    def get_assets(self, timeStamp):
+        return self.getLocalYaml("assets", timeStamp)
 
+    def get_playlist(self, timeStamp):
+        return self.getLocalYaml("playlist", timeStamp)
 
-def getLocalYaml(path, timeStamp):
-    try:
-        localTimeStamp = os.path.getmtime(path + ".yaml")
-        with open(path + ".yaml") as assets:
-            if localTimeStamp > timeStamp:
-                return {path: yaml.load(assets)}
-            else:
-                return {"error": "Old"}
-    except OSError:
-        return {"error": "An error parsing the yaml"}
+    def getLocalYaml(self, path, timeStamp):
+        try:
+            localTimeStamp = os.path.getmtime(path + ".yaml")
+            with open(path + ".yaml") as assets:
+                if localTimeStamp > timeStamp:
+                    return {path: yaml.load(assets)}
+                else:
+                    return {"error": "Old"}
+        except OSError:
+            return {"error": "An error parsing the yaml"}

@@ -17,8 +17,8 @@ def main():
     sourceList["local"] = sources.localSource()
 
     # TODO Don't use local for everything
-    assets = sourceList["local"]["getAsset"](0)
-    playlist = sourceList["local"]["getPlaylist"](0)
+    assets = sourceList["local"].get_assets(0)
+    playlist = sourceList["local"].get_playlist(0)
 
     # Start mpv
     media.findAndPlay(messages, playableGenerator(assets, playlist, messages))
