@@ -35,5 +35,5 @@ class HTTPSource:
                 self.assets = yaml.load(remote_file.content)
 
         if 'playlists' in urls:
-            with requests.get(urls['playlist'], verify=False) as remote_file:
+            with requests.get(urls['playlists'], verify=False) as remote_file:
                 self.playlist = yaml.load(remote_file.content)
