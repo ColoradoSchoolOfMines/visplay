@@ -11,7 +11,6 @@ def playable_generator(source, playlist, messages):
     """Return a generator that will infinitely return new things to play."""
     running = True
     while running:
-        print(playlist)
         for playable in playlist:
             # if a message is sent telling this to reload, do it
             if not messages.empty():
@@ -47,7 +46,7 @@ def main():
     sources = setupConfig.get_source_list(args.config, constructors)
 
     assets = sources[0].assets
-    playlist = sources[0].playlist
+    playlist = sources[0].playlists
 
     # Start mpv
     media.findAndPlay(messages, playable_generator(assets, playlist, messages))

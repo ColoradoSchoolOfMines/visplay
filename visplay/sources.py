@@ -1,4 +1,3 @@
-import os
 import yaml
 import requests
 
@@ -6,34 +5,33 @@ import requests
 # how to get an asset file, and how to get a playlist file.
 
 
+def get_local_yaml(yaml_path):
+    if yaml_path is None:
+        return
+    try:
+        with open(yaml_path) as yaml_file:
+            return yaml.load(yaml_file)
+
+    except OSError:
+        return {'error': 'An error parsing the yaml'}
+
+
 class LocalSource:
 
-    def __init__(self, path):
+    def __init__(self, assets_path=None, playlists_path=None):
         self.survive = True
-        self.path = path
-        self.assets = self.get_local_yaml('assets', 0)
-        self.playlist = self.get_local_yaml('playlist', 0)
-
-    def get_local_yaml(self, path, timeStamp):
-        try:
-            localTimeStamp = os.path.getmtime(self.path + path + '.yaml')
-            with open(self.path + path + '.yaml') as assets:
-                if localTimeStamp > timeStamp:
-                    return yaml.load(assets)
-                else:
-                    return {'error': 'Old'}
-        except OSError:
-            return {'error': 'An error parsing the yaml'}
+        self.assets = get_local_yaml(assets_path)
+        self.playlists = get_local_yaml(playlists_path)
 
 
 class HTTPSource:
 
-    def __init__(self, urls):
+    def __init__(self, assets_path=None, playlists_path=None):
 
-        if 'assets' in urls:
-            with requests.get(urls['assets'], verify=False) as remote_file:
+        if assets_path is not None:
+            with requests.get(assets_path, verify=False) as remote_file:
                 self.assets = yaml.load(remote_file.content)
 
-        if 'playlists' in urls:
-            with requests.get(urls['playlists'], verify=False) as remote_file:
-                self.playlist = yaml.load(remote_file.content)
+        if playlists_path is not None:
+            with requests.get(playlists_path, verify=False) as remote_file:
+                self.playlists = yaml.load(remote_file.content)
