@@ -9,7 +9,7 @@ Stream videos and open media files using an `mpv` implementation.
 Under Construction
 
 ## Configuration
-Visplay by default looks in $XDG_CONFIG_HOME, and the $HOME/.config for visplay.conf
+Visplay by default looks in $XDG_CONFIG_HOME, and the $HOME/.config for visplay.conf.
 This is the main local configuration and points to any number of assets.yaml files and playlists.yaml files (whether local or remote)
 
 See visplay.yaml.example, assets.yaml.example, and playlists.yaml.example for example configurations.

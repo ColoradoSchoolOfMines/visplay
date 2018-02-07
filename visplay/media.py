@@ -37,14 +37,12 @@ def findAndPlay(messages, generator):
     # Pass the keypress functions the queue
     messengerDic['queue'] = messages
 
-    still_running = True
 
-    while still_running:
-        player.fullscreen = True
+    player.fullscreen = True
 
-        # Loop through videos from the generator
-        for video in generator:
-            player.play(video)
-            player.wait_for_playback()
-            if not messages.empty() and messages.get_nowait() == 'quit':
-                exit(0)
+    # Loop through videos from the generator
+    for video in generator:
+        player.play(video)
+        player.wait_for_playback()
+        if not messages.empty() and messages.get_nowait() == 'quit':
+            exit(0)

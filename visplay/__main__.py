@@ -9,15 +9,15 @@ from visplay.sources import LocalSource, HTTPSource
 
 def playable_generator(source, playlist, messages):
     """Return a generator that will infinitely return new things to play."""
-    running = True
-    while running:
-        for playable in playlist:
-            # if a message is sent telling this to reload, do it
-            if not messages.empty():
-                message = messages.get_nowait()
-                if 'source' in message:
-                    source = message['source']
-            yield source[playable]
+    # running = True
+    # while running:
+    for playable in playlist:
+        # if a message is sent telling this to reload, do it
+        if not messages.empty():
+            message = messages.get_nowait()
+            if 'source' in message:
+                source = message['source']
+        yield source[playable]
 
 
 def main():
@@ -45,11 +45,14 @@ def main():
     constructors = {'local': LocalSource, 'http': HTTPSource}
     sources = setupConfig.get_source_list(args.config, constructors)
 
-    assets = sources[0].assets
-    playlist = sources[0].playlists
+    # print(sources)
+    # assets = sources[0].assets
+    # playlist = sources[0].playlists
 
     # Start mpv
-    media.findAndPlay(messages, playable_generator(assets, playlist, messages))
+
+    for source in sources:
+        media.findAndPlay(messages, playable_generator(source.assets, source.playlists, messages))
 
 
 if __name__ == '__main__':
