@@ -10,6 +10,7 @@ Under Construction
 
 ## Dependencies
 MPV
+libmpv
 
 For python dependecies run:
 
