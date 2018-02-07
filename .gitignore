@@ -111,5 +111,5 @@ venv.bak/
 
 # visplay config files
 assets.yaml
-playlist.yaml
+playlists.yaml
 config.yaml
