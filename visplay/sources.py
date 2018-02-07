@@ -30,8 +30,10 @@ class HTTPSource:
 
     def __init__(self, urls):
 
-        with requests.get(urls['assets'], verify=False) as remote_file:
-            self.assets = yaml.load(remote_file.content)
+        if 'assets' in urls:
+            with requests.get(urls['assets'], verify=False) as remote_file:
+                self.assets = yaml.load(remote_file.content)
 
-        with requests.get(urls['playlist'], verify=False) as remote_file:
-            self.playlist = yaml.load(remote_file.content)
+        if 'playlists' in urls:
+            with requests.get(urls['playlist'], verify=False) as remote_file:
+                self.playlist = yaml.load(remote_file.content)
