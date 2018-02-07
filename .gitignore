@@ -106,8 +106,8 @@ venv.bak/
 
 # End of https://www.gitignore.io/api/python
 
-
-
+# vscode run fiels
+/.vscode
 
 # visplay config files
 assets.yaml
