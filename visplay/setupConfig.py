@@ -7,7 +7,7 @@ def get_source_list(config_file, source_constructors):
     print(source_constructors)
     config.sort(key=lambda x: x["priority"])
     for source in config:
-        name = source["name"]
+        video_type = source["type"]
         args = source["args"]
-        all_sources.append(source_constructors[name](args))
+        all_sources.append(source_constructors[video_type](args))
     return all_sources
