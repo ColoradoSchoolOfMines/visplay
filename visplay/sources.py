@@ -27,10 +27,13 @@ class LocalSource:
 class HTTPSource:
 
     def __init__(self, assets_path=None, playlists_path=None):
+        try:
+            if assets_path is not None:
+                with requests.get(assets_path, verify=False) as remote_file:
+                    self.assets = yaml.load(remote_file.content)
 
-        if assets_path is not None:
-            with requests.get(assets_path, verify=False) as remote_file:
-                self.assets = yaml.load(remote_file.content)
+        except ConnectionError:
+            return {'error': 'URL not available'}
 
         if playlists_path is not None:
             with requests.get(playlists_path, verify=False) as remote_file:
