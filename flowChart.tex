@@ -1,0 +1,141 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{matrix,shapes,arrows,positioning,chains}
+
+\begin{document}
+\section{Intro}
+The following charts show the current progress and general program flow.
+Green is done, yellow is partial, and red hasn't been started. The program
+flow will likely change a large amount as things stop working and we see
+better ways of doing it.
+
+\break
+
+\section{Control Flow}
+\tikzstyle{startstop} =
+	[rectangle,
+	rounded corners,
+	minimum width=3cm,
+	minimum height=1cm,
+	text centered,
+	draw=black,
+	fill=red!30]
+
+\tikzstyle{unfinished} =
+	[rectangle,
+	rounded corners,
+	minimum width=3cm,
+	minimum height=1cm,
+	text centered,
+	draw=black,
+	fill=red!30]
+
+\tikzstyle{partial} =
+	[rectangle,
+	rounded corners,
+	minimum width=3cm,
+	minimum height=1cm,
+	text centered,
+	draw=black,
+	fill=yellow!30]
+
+\tikzstyle{invisible} =
+	[rectangle,
+	minimum width=0cm,
+	minimum height=0cm]
+
+\tikzstyle{done} =
+	[rectangle,
+	rounded corners,
+	minimum width=3cm,
+	minimum height=1cm,
+	text centered,
+	draw=black,
+	fill=green!30]
+
+\tikzstyle{arrow} =
+	[thick,
+	->,
+	>=stealth]
+\tikzstyle{line} =
+	[thick,
+	-,
+	>=stealth]
+
+\begin{tikzpicture}[node distance=2cm]
+
+	\node (start) [done] {Program Begin};
+	\node (mpv) [done, below of=start] {Start MPV};
+	\node (error) [unfinished, right of=start, xshift=8cm] {Error};
+	\node (configP) [done, below of=mpv] {Parse Config};
+	\node (construct) [done, below of=configP] {Construct Sources};
+	\node (sources) [unfinished, below of=construct] {Do any sources offer a config?};
+	\node (s2c) [invisible, right of=sources, xshift=2cm] {};
+	\node (assets) [partial, below of=sources] {Get all asset files};
+	\node (playlists) [done, below of=assets] {Get higest priority playlist};
+	\node (getNext) [done, below of=playlists] {Get next playlist item};
+	\node (getAsset) [partial, right of=getNext, xshift=2cm] {Find in assets};
+	\node (play) [done, right of=getAsset, xshift=2cm] {Play asset};
+	\node (p2g) [invisible, above of=play, yshift=-0.8cm] {};
+	\node (listen) [unfinished, below of=getNext] {Run sources update every x seconds};
+
+	\draw [arrow] (start) -- (mpv);
+	\draw [arrow] (mpv) -- (configP);
+	\draw [arrow] (configP) -- (construct);
+	\draw [arrow] (construct) -- (sources);
+	\draw [line] (sources) -- node [anchor=south] {Yes} (s2c);
+	\draw [arrow] (s2c.west) |- (configP);
+	\draw [arrow] (sources) -- (assets);
+	\draw [arrow] (assets.east) -| node [anchor=south, xshift=-5.2cm] {If no asset file found} (error);
+	\draw [arrow] (assets) -- (playlists);
+	\draw [arrow] (playlists) -| node [anchor=south, xshift=-5cm] {If no playlist file found} (error);
+	\draw [arrow] (playlists) -- (getNext);
+	\draw [arrow] (getNext) -- (listen);
+	\draw [arrow] (getNext) -- (getAsset);
+	\draw [arrow] (getAsset) -- (play);
+	\draw [line] (play) -- (p2g);
+	\draw [arrow] (p2g.south) -| (getNext);
+\end{tikzpicture}
+
+\section{Messaging}
+\begin{tikzpicture}[node distance=2cm]
+	\node (mGet) [startstop, below of=listen] {Message recieved from source};
+	\node (parse) [unfinished, below of=mGet] {Determine the type of message};
+	\node (oneShot) [unfinished, below of=parse] {One shot};
+	\node (repeat) [unfinished, right of=oneShot, xshift=2cm] {Repeat};
+	\node (urgency) [unfinished, below of=oneShot] {Determine urgency of message};
+	\node (urgent) [unfinished, below of=urgency] {Now};
+	\node (lazy) [unfinished, right of=urgent, xshift=2cm] {After video};
+	\node (lazier) [unfinished, right of=urgent, xshift=6cm] {After playlist};
+	\node (content) [unfinished, below of=urgent] {The type of content carried in the message};
+	\node (playlists) [unfinished, below of=content] {Replace playlist};
+	\node (assets) [unfinished, right of=playlists, xshift=2cm] {Replace assets};
+
+	\draw [arrow] (mGet) -- (parse);
+	\draw [arrow] (parse) -- (oneShot);
+	\draw [arrow] (parse) -- (repeat);
+	\draw [arrow] (oneShot) -- (urgency);
+	\draw [arrow] (repeat) -- (urgency);
+	\draw [arrow] (urgency) -- (urgent);
+	\draw [arrow] (urgency) -- (lazy);
+	\draw [arrow] (urgency) -- (lazier);
+	\draw [arrow] (urgent) -- (content);
+	\draw [arrow] (lazy) -- (content);
+	\draw [arrow] (lazier) -- (content);
+	\draw [arrow] (content) -- (playlists);
+	\draw [arrow] (content) -- (assets);
+
+
+\end{tikzpicture}
+\break
+\break
+The following is even more likely to change.
+
+A source is only allowed to modify its own assets and playlists. A given
+source has two locations where it can store data. The first is the oneshot
+location. After a oneshot playlist finishes, it is removed. Assets will
+remain. A repeat playlist stays around and is repeated after finishing.
+A repeat asset stays around as well.
+
+\end{document}

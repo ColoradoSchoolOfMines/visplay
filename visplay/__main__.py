@@ -7,17 +7,34 @@ from visplay import media, setupConfig
 from visplay.sources import LocalSource, HTTPSource
 
 
-def playable_generator(source, playlist, messages):
+def playable_generator(sources, messages):
     """Return a generator that will infinitely return new things to play."""
-    # running = True
-    # while running:
-    for playable in playlist:
-        # if a message is sent telling this to reload, do it
-        if not messages.empty():
-            message = messages.get_nowait()
-            if 'source' in message:
-                source = message['source']
-        yield source[playable]
+    running = True
+    while running:
+        playlist = []
+        asset = {}
+        prev_priority = "hu"
+        for source in sources:
+            if source[0].assets:
+                asset = {**source[0].assets, **asset}
+            if source[0].playlists:
+                print(prev_priority, source[1])
+                print(source[0].playlists)
+                if source[1] == prev_priority:
+                    playlist += source[0].playlists
+                    print(playlist)
+                else:
+                    playlist = source[0].playlists
+            prev_priority = source[1]
+
+        print(playlist)
+        for playable in playlist:
+            # if a message is sent telling this to reload, do it
+            if not messages.empty():
+                message = messages.get_nowait()
+                if 'source' in message:
+                    source = message['source']
+            yield asset[playable]
 
 
 def main():
@@ -45,14 +62,7 @@ def main():
     constructors = {'local': LocalSource, 'http': HTTPSource}
     sources = setupConfig.get_source_list(args.config, constructors)
 
-    # print(sources)
-    # assets = sources[0].assets
-    # playlist = sources[0].playlists
-
-    # Start mpv
-
-    for source in sources:
-        media.findAndPlay(messages, playable_generator(source.assets, source.playlists, messages))
+    media.findAndPlay(messages, playable_generator(sources, messages))
 
 
 if __name__ == '__main__':
