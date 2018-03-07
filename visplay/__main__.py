@@ -40,7 +40,7 @@ def playable_generator(sources, messages):
 def main():
     """The main entrypoint for program when run standalone."""
     # Determine the config folder
-    config_folder = environ.get('XDG_CONFIG_HOME') or path.join(environ.get('HOME'), '.yaml')
+    config_folder = environ.get('XDG_CONFIG_HOME') or path.join(environ.get('HOME'), '.config')
     if not path.exists(config_folder):
         makedirs(config_folder)
 
