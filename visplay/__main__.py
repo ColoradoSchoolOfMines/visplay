@@ -47,7 +47,7 @@ def main():
     parser = ArgumentParser()
     parser.add_argument('-c', '--config',
                         type=open,
-                        default=path.join(config_folder, 'visplay.conf'),
+                        default=path.join(config_folder, 'visplay.yaml'),
                         help='Specify a custom configuration file to load.')
     try:
         args = parser.parse_args()
