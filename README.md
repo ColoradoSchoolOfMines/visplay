@@ -19,14 +19,10 @@ See visplay.yaml.example, assets.yaml.example, and playlists.yaml.example for ex
 MPV
 libmpv
 
-For python dependecies run:
-
-    pip3 . install --user
-
 ## Installation
-Run:
+In the cloned visplay repo run:
 
-    pip install . --user
+    pip3 install . --user
 
 then you can just run `visplay`.
 
