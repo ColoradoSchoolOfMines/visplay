@@ -17,7 +17,10 @@ See visplay.yaml.example, assets.yaml.example, and playlists.yaml.example for ex
 
 ## Dependencies
 MPV
+
 libmpv
+
+youtube-dl
 
 ## Installation
 In the cloned visplay repo run:
