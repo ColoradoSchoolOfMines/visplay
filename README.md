@@ -26,6 +26,10 @@ To create configs:
 
 ## Dependencies
 
+python3
+
+pip3
+
 libmpv / mpv (depends on distro) 
 
 youtube-dl
