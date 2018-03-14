@@ -16,9 +16,11 @@ See visplay.yaml.example, assets.yaml.example, and playlists.yaml.example for ex
 
 To create configs:
 
-    cp visplay.yaml.example ~/.config/visplay.yaml
-    cp assets.yaml.example assets.yaml
-    cp playlists.yaml.example playlists.yaml
+    mkdir ~/.config/visplay
+    cp config.yaml.example ~/.config/visplay/config.yaml
+    cp sources.yaml.example ~/.config/visplay/sources.yaml
+    cp assets.yaml.example ~/.config/visplay/assets.yaml
+    cp playlists.yaml.example ~/.config/visplay/playlists.yaml
 
     edit ~/.config/visplay.yaml to point to assets.yaml and playlists.yaml
 
