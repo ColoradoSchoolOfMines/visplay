@@ -33,7 +33,9 @@ def my_p_binding():
     player.pause = not player.pause
 
 
-def findAndPlay(messages, generator):
+def find_and_play(messages, generator):
+    '''find_and_play: gets videos from the generator and plays them'''
+
     # Pass the keypress functions the queue
     messengerDic['queue'] = messages
 

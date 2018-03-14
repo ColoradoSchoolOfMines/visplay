@@ -4,6 +4,8 @@ from argparse import ArgumentParser
 
 
 def load_config_yaml():
+    '''load_config_yaml: loads config.yaml based on provided arguments
+        or default location'''
 
     config_folder = environ.get('XDG_CONFIG_HOME') or path.join(
         environ.get('HOME'), '.config')

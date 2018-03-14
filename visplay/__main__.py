@@ -1,7 +1,5 @@
 """Main entrypoint for Visplay."""
-from os import environ, path, makedirs
 from queue import Queue
-from argparse import ArgumentParser
 
 from visplay import media, setupConfig, config
 from visplay.sources import LocalSource, HTTPSource
@@ -62,7 +60,7 @@ def main():
     sources = setupConfig.get_sources_list(
         config_dict['sources'], constructors)
 
-    media.findAndPlay(messages, playable_generator(sources, messages))
+    media.find_and_play(messages, playable_generator(sources, messages))
 
 
 if __name__ == '__main__':
