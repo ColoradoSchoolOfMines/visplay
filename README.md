@@ -28,7 +28,7 @@ To create configs:
 
 python3
 
-pip3
+python3-pip (pip3)
 
 libmpv / mpv (depends on distro) 
 

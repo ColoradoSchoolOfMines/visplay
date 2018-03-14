@@ -3,7 +3,7 @@ from os import environ, path, makedirs
 from queue import Queue
 from argparse import ArgumentParser
 
-from visplay import media, setupConfig
+from visplay import media, setupConfig, config
 from visplay.sources import LocalSource, HTTPSource
 
 
@@ -39,28 +39,18 @@ def playable_generator(sources, messages):
 
 def main():
     """The main entrypoint for program when run standalone."""
-    # Determine the config folder
-    config_folder = environ.get('XDG_CONFIG_HOME') or path.join(environ.get('HOME'), '.config')
-    if not path.exists(config_folder):
-        makedirs(config_folder)
 
-    parser = ArgumentParser()
-    parser.add_argument('-c', '--config',
-                        type=open,
-                        default=path.join(config_folder, 'visplay.yaml'),
-                        help='Specify a custom configuration file to load.')
-    try:
-        args = parser.parse_args()
-    except Exception as e:
-        print('Error parsing arguments:', e)
-        return
+    # Calls the config function to get a dict of settings values
+    config_dict = config.load_config_yaml()
 
     # There are multiple threads so this allows them to communicate
     messages = Queue()
 
     # A list of sources following a basic interface. See sources.py
     constructors = {'local': LocalSource, 'http': HTTPSource}
-    sources = setupConfig.get_source_list(args.config, constructors)
+
+    sources = setupConfig.get_sources_list(
+        config_dict['sources'], constructors)
 
     media.findAndPlay(messages, playable_generator(sources, messages))
 
