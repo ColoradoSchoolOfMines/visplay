@@ -36,21 +36,17 @@ youtube-dl
 
 ## Installation
 In the cloned visplay repo run:
-
-    pip3 install . --user
-
-then you can just run `visplay`.
-
-If you have already installed, add `--update` to the `pip install` command.
-
-## Developing Locally
-
-    install dependencies listed in "Dependencies"
+    
+    #install dependencies listed in "Dependencies"
 
     git clone https://github.com/ColoradoSchoolOfMines/visplay.git
     cd visplay
     pip3 install -e . --user
 
-    create necessary config files as described in "Configuration"
+    #create necessary config files as described in "Configuration"
 
-    python3 visplay/__main__.py
+then you can just run `visplay`.
+
+If you have already installed, add `--update` to the `pip install` command.
+
+
