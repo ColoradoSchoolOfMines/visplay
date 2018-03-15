@@ -1,0 +1,15 @@
+[package]
+name = "libvis_py"
+version = "0.0.0"
+authors = ["Mines ACM"]
+
+[lib]
+name = "libvis_py"
+crate-type = ["cdylib"]
+
+[dependencies]
+libvis = { path = "../libvis", version="0.0.0" }
+
+[dependencies.pyo3]
+version = "0.2"
+features = ["extension-module"]

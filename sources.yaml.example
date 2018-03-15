@@ -1,12 +1,14 @@
-- name: local
-  type: local
-  args:
-    assets_path: /home/user/development/ACM/visplay/assets.yaml
-    playlists_path: /home/user/development/ACM/visplay/playlists.yaml
-  priority: 8
-- name: my_server
-  type: http
-  args:
-    assets_path: http://example.com/assets.yaml
-    playlists_path: http://exmaple.com/playlists.yaml
-  priority: 0
+import:
+  - path: "http://example.com/sources.yml"
+    name: example_com
+    priority: 0
+  - path: "http://acm.mines.edu/vis.yml"
+    name: acm
+    priority: 100
+add:
+  - path: /home/user/visplay/assets.yml
+    many: asset
+  - path: /home/user/visplay/playlists.yml
+    many: playlist
+  - path: /home/user/visplay/startup.yml
+    single: playlist
