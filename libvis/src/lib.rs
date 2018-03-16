@@ -8,77 +8,141 @@ extern crate serde_yaml;
 extern crate rmp_serde;
 #[macro_use]
 extern crate failure;
-extern crate http;
+extern crate mime;
+extern crate mime_guess;
+extern crate hyper;
+extern crate easy_uri as uri;
 
-use http::uri::Uri;
+use std::fmt;
+use std::str::FromStr;
+
+use mime::Mime;
+use uri::Uri;
 use failure::Error;
-use serde::Deserialize;
+use serde::{Serialize, Serializer, Deserialize, Deserializer};
+use std::collections::{VecDeque, HashMap};
+use std::path::{Path, PathBuf};
 
-mod uri_serde {
-    use std::str::FromStr;
-    use http::uri::Uri;
-    use serde::{Serialize, Serializer, Deserialize, Deserializer};
+#[derive(Clone, PartialEq, Eq, Hash)]
+pub struct WildUri {
+    parts: Vec<String>,
+}
 
-    pub fn serialize<S>(uri: &Uri, ser: S) -> Result<S::Ok, S::Error> where S: Serializer {
-        format!("{}", uri).serialize(ser)
+impl WildUri {
+    pub fn new(uri: &str) -> WildUri {
+        WildUri {
+           parts: uri.split("*").map(ToOwned::to_owned).collect()
+       }
     }
 
-    pub fn deserialize<'de, D>(de: D) -> Result<Uri, D::Error> where D: Deserializer<'de> {
-        use serde::de::Error as DeError;
-        let string = String::deserialize(de)?;
-        Uri::from_str(&string).map_err(DeError::custom)
+    
+    pub fn render(&self, fill: &str) -> Result<Uri, Error> {
+        Ok(Uri::from_str(&self.render_str(fill))?)
+    }
+
+    pub fn render_str(&self, fill: &str) -> String {
+        if let Some(first) = self.parts.get(0) {
+            let mut out = first.clone();
+            for part in &self.parts[1..] {
+                out += fill;
+                out += part;
+            }
+            out
+        } else {
+            String::new()
+        }
+    }
+
+    pub fn wild_str(&self) -> String {
+        self.render_str("*")
     }
 }
 
-#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Hash)]
+impl fmt::Debug for WildUri {
+    fn fmt(&self, f: &mut fmt::Formatter) -> Result<(), fmt::Error> {
+        write!(f, "{:?}", self.wild_str())
+    }
+}
+
+impl<'de> Deserialize<'de> for WildUri {
+    fn deserialize<D>(de: D) -> Result<WildUri, D::Error> where D: Deserializer<'de> {
+       Ok(WildUri::new(&String::deserialize(de)?))
+    }
+}
+
+impl Serialize for WildUri {
+    fn serialize<S>(&self, ser: S) -> Result<S::Ok, S::Error> where S: Serializer {
+       self.wild_str().serialize(ser)
+    }
+}
+
+impl FromStr for WildUri {
+    type Err = (); // TODO: bang type
+    fn from_str(s: &str) -> Result<WildUri, ()> {
+        Ok(WildUri::new(s))
+    }
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
 pub struct Import {
-    #[serde(with="uri_serde")]
     pub path: Uri,
     pub name: String,
+    #[serde(default)]
     pub priority: i32,
 }
 
-#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
 #[serde(untagged)]
 pub enum Added {
     Single {
-        #[serde(with="uri_serde")]
         path: Uri,
         single: String,
     },
     Many {
-        #[serde(with="uri_serde")]
         path: Uri,
         many: String,
+    },
+    Wild {
+        path: WildUri,
+        wild: String,
     },
 }
 
 #[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Hash)]
 pub struct Source {
+    #[serde(default)]
     pub import: Vec<Import>,
+    #[serde(default)]
     pub add: Vec<Added>,
 }
 
-pub fn de_path<D>(path: Uri, hint: Option<&str>) -> Result<D, Error>
+pub fn de_path<D>(path: &Uri, hint: Option<Mime>) -> Result<D, Error>
     where D: for<'de> Deserialize<'de>
 {
     let errmsg = || format!("can not load data at \"{}\"", path);
 
-    match path.scheme() {
+    match path.scheme.as_ref().map(String::as_str) {
         None | Some("file") | Some("files") => {
-            use std::ffi::OsStr;
             use std::fs::File;
 
-            let path: &std::path::Path = path.path().as_ref();
-            let file = File::open(path)?;
-            let hint = hint.or(path.extension().and_then(OsStr::to_str));
+            let path = &path.path;
 
-            match hint {
-                Some("json") => Ok(serde_json::from_reader(file)?),
-                Some("yml") | Some("yaml") => Ok(serde_yaml::from_reader(file)?),
-                Some("mp") | Some("msgpack") => Ok(rmp_serde::from_read(file)?),
-                Some(form) => bail!("{}: unknown format \"{}\"", errmsg(), form),
+            let file = File::open(&path)?;
+            let mime = match hint.or(mime_guess::guess_mime_type_opt(path)) {
+                Some(m) => m,
                 None => bail!("{}: cannot infer format", errmsg()),
+            };
+
+            let mut subtype = mime.subtype().as_str();
+            if subtype.starts_with("x-") {
+                subtype = &subtype[2..];
+            }
+
+            match subtype {
+                "json" => Ok(serde_json::from_reader(file)?),
+                "yaml" => Ok(serde_yaml::from_reader(file)?),
+                "msgpack" => Ok(rmp_serde::from_read(file)?),
+                form => bail!("{}: unknown format \"{}\"", errmsg(), form),
             }
         },
         Some("http") | Some("https") => {
@@ -91,23 +155,26 @@ pub fn de_path<D>(path: Uri, hint: Option<&str>) -> Result<D, Error>
 }
 
 impl Source {
-    pub fn load(path: Uri, format_hint: Option<&str>) -> Result<Self, Error> {
+    pub fn open_uri(path: &Uri, format_hint: Option<Mime>) -> Result<Self, Error> {
         de_path(path, format_hint)
+    }
+
+    pub fn open<S>(path: S, format_hint: Option<Mime>) -> Result<Self, Error>
+        where S: AsRef<str>
+    {
+        Source::open_uri(&Uri::from_str(path.as_ref())?, format_hint)
     }
 }
 
 #[test]
 fn test_load_example_source() {
-    use std::fs::File;
-    use std::str::FromStr;
-
-    let s: Source = serde_yaml::from_reader(File::open("../sources.yaml.example").unwrap()).unwrap();
+    let s = Source::open("../example.sources.yml", None).unwrap();
     assert_eq!(s, Source {
         import: vec![
             Import { path: Uri::from_str("http://example.com/sources.yml").unwrap(), name: "example_com".to_owned(), priority: 0 },
             Import { path: Uri::from_str("http://acm.mines.edu/vis.yml").unwrap(), name: "acm".to_owned(), priority: 100 }
         ],
-        add: vec! [
+        add: vec![
             Added::Many { path: Uri::from_str("/home/user/visplay/assets.yml").unwrap(), many: "asset".to_owned() },
             Added::Many { path: Uri::from_str("/home/user/visplay/playlists.yml").unwrap(), many: "playlist".to_owned() },
             Added::Single { path: Uri::from_str("/home/user/visplay/startup.yml").unwrap(), single: "playlist".to_owned() },
@@ -115,17 +182,66 @@ fn test_load_example_source() {
     });
 }
 
+#[test]
+fn test_load_youtube_source() {
+    let s = Source::open("../youtube.sources.yml", None).unwrap();
+    assert_eq!(s, Source {
+        import: vec![],
+        add: vec![
+            Added::Wild { path: WildUri {
+                parts: vec!["data:text/yaml,-%20https%3A%2F%2Fyoutu.be%2F".to_owned(), "".to_owned()]
+            }, wild: "asset".to_owned() },
+        ]
+    });
+}
+
 pub struct Config {
     pub dbpath: String,
-    pub roots: Vec<Source>,
+    pub root: Source,
 }
 
 pub struct Universe {
-
+    pub sources: HashMap<String, Source>,
 }
 
 impl Universe {
     pub fn new(cfg: Config) -> Universe {
-        unimplemented!()
+        let mut u = Universe {
+            sources: HashMap::new(),
+        };
+        u.sources.insert(":".to_owned(), cfg.root);
+        u.expand();
+        u
+    }
+
+    fn expand(&mut self) {
+        fn add_to_queue(
+            name: &str,
+            queue: &mut VecDeque<(String, PathBuf, Import)>,
+            source: &Source)
+        {
+            queue.extend(source.import.iter().cloned().map(|i| (
+                name.to_owned(),
+                i.path.path.parent().unwrap_or("/".as_ref()).to_owned(),
+                i,
+            )));
+        }
+
+        let mut queue = VecDeque::new();
+        for (name, source) in &self.sources {
+            add_to_queue(&name, &mut queue, &source);
+        }
+
+        while let Some((name, local, import)) = queue.pop_front() {
+            match Source::open_uri(&import.path, None) {
+                Ok(source) => {
+                    let name = name.clone() + &import.name;
+                    add_to_queue(&name, &mut queue, &source);
+                    self.sources.insert(name, source);
+                },
+                Err(e) => eprintln!("{}", e),
+            }
+            
+        }
     }
 }

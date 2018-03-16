@@ -1,0 +1,3 @@
+add:
+  - path: data:text/yaml,-%20https%3A%2F%2Fyoutu.be%2F*
+    wild: asset

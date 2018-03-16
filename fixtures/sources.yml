@@ -1,0 +1,5 @@
+import:
+  - path: acm.yml
+    name: acm
+  - path: mozilla.yml
+    name: moz

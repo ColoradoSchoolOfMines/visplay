@@ -8,8 +8,6 @@ name = "libvis_py"
 crate-type = ["cdylib"]
 
 [dependencies]
-libvis = { path = "../libvis", version="0.0.0" }
-
-[dependencies.pyo3]
-version = "0.2"
-features = ["extension-module"]
+libvis = { path = "../libvis", version="0.0" }
+failure = "0.1"
+pyo3 = { version = "0.2", features = ["extension-module"] }

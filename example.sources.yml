@@ -1,7 +1,6 @@
 import:
   - path: "http://example.com/sources.yml"
     name: example_com
-    priority: 0
   - path: "http://acm.mines.edu/vis.yml"
     name: acm
     priority: 100
