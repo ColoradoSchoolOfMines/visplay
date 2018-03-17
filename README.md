@@ -5,8 +5,20 @@ display media of ACM's projects. The project uses MPV and python.
 ## Features
 Stream videos and open media files using an `mpv` implementation.
 
-## Documentation
-Under Construction
+## Installation
+In the cloned visplay repo run:
+    
+    #install dependencies listed in "Dependencies"
+
+    git clone https://github.com/ColoradoSchoolOfMines/visplay.git
+    cd visplay
+    pip3 install -e . --user
+
+    #create necessary config files as described in "Configuration"
+
+then you can just run `visplay`.
+
+If you have already installed, add `--update` to the `pip install` command.
 
 ## Configuration
 Visplay by default looks in $XDG_CONFIG_HOME, and the $HOME/.config for visplay.yaml.
@@ -36,19 +48,33 @@ libmpv / mpv (depends on distro)
 
 youtube-dl
 
-## Installation
-In the cloned visplay repo run:
+## Documentation
+### Yaml Configuration Layout
+config.yaml: Points source info, potentailly in the future this can be used to configure other options
+
+    sourcename: Directory to sources.yaml
+
+sources.yaml: Points to local and networked asssest and playlist lists
     
-    #install dependencies listed in "Dependencies"
+    - name: local
+      type: local
+      args:
+        assets_path: /home/user/development/ACM/visplay/assets.yaml
+        playlists_path:/home/user/development/ACM/visplay/playlists.yaml
+      priority: 8
+    - name: my_server
+      type: http
+      args:
+        assets_path: http://example.com/assets.yaml
+        playlists_path: http://exmaple.com/playlists.yaml
+      priority: 0
 
-    git clone https://github.com/ColoradoSchoolOfMines/visplay.git
-    cd visplay
-    pip3 install -e . --user
+assets.yaml : Contains File pathes to assets
 
-    #create necessary config files as described in "Configuration"
+    TheAssetName: local path or url
+    CoolestVidEver: https://www.youtube.com/watch?v=dQw4w9WgXcQ
 
-then you can just run `visplay`.
+playlists.yaml: Controls control flow for assets
 
-If you have already installed, add `--update` to the `pip install` command.
-
-
+    - CoolestVidEver
+    - TheAssetName
