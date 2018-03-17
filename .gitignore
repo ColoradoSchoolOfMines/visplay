@@ -114,3 +114,6 @@ assets.yaml
 playlists.yaml
 config.yaml
 sources.yaml
+
+# qtcreator
+build-visplay-gui-Desktop-Debug
