@@ -1,5 +1,8 @@
 import yaml
 import requests
+from visplay.setupConfig import get_sources_list
+from visplay.setupConfig import sources_to_asset
+from visplay.setupConfig import sources_to_play
 
 # Every source needs to say whether the files it gets survive after an error,
 # how to get an asset file, and how to get a playlist file.
@@ -18,10 +21,21 @@ def get_local_yaml(yaml_path):
 
 class LocalSource:
 
-    def __init__(self, assets_path=None, playlists_path=None):
+    def __init__(self, as_asset=None, as_source=None):
         self.survive = True
-        self.assets = get_local_yaml(assets_path)
-        self.playlists = get_local_yaml(playlists_path)
+        if as_source:
+            source_path = as_source['source_path']
+            constructors = as_source['construct']
+            name = as_source['namespace']
+            self.sources = get_sources_list(source_path, constructors)
+            self.assets = sources_to_asset(name, self.sources)
+            self.playlists = sources_to_play(name, self.sources)
+
+        if as_asset:
+            assets_path = as_asset['assets_path']
+            playlists_path = as_asset['playlists_path']
+            self.assets = get_local_yaml(assets_path)
+            self.playlists = get_local_yaml(playlists_path)
 
 
 class HTTPSource:

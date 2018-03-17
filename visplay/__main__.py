@@ -3,6 +3,8 @@ from queue import Queue
 
 from visplay import media, setupConfig, config
 from visplay.sources import LocalSource, HTTPSource
+from visplay.setupConfig import sources_to_asset
+from visplay.setupConfig import sources_to_play
 
 
 def playable_generator(sources, messages):
@@ -10,39 +12,21 @@ def playable_generator(sources, messages):
     running = True
     while running:
         playlist = []
-        assets = [{}]
-        prev_priority = "None"
+        assets = {}
+        prev_priority = -1
         # Find the assets and playlists in each source
         for source in sources:
-            # Get the asset first
-            if source[0].assets:
-                # Flatten sources with the same priority
-                if source[1] == prev_priority:
-                    assets[len(assets) - 1] = {**source[0].assets, **assets[len(assets) - 1]}
-                else:
-                    # Fill the first element so we don't end up with an empty one
-                    if len(assets) == 0:
-                        assets[0] = source[0].assets
-                    else:
-                        assets.append(source[0].assets)
-            if source[0].playlists:
-                if source[1] == prev_priority:
-                    playlist += source[0].playlists
-                else:
-                    playlist = source[0].playlists
-            prev_priority = source[1]
-        # Consider changing the order in which sources are loaded
-        assets.reverse()
+            if source.playlists and source.priority > prev_priority:
+                playlist = source.playlists
+            if source.assets:
+                assets = {**assets, **source.assets}
         for playable in playlist:
             # if a message is sent telling this to reload, do it
             if not messages.empty():
                 message = messages.get_nowait()
                 if 'source' in message:
                     source = message['source']
-            for asset in assets:
-                if playable in asset:
-                    yield asset[playable]
-                    break
+            yield assets[playable]
 
 
 def main():
