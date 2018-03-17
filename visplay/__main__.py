@@ -18,7 +18,7 @@ def playable_generator(sources, messages):
             if source[0].assets:
                 # Flatten sources with the same priority
                 if source[1] == prev_priority:
-                    asset[len(assets) - 1] = {**source[0].assets, **assets[len(assets) - 1]}
+                    assets[len(assets) - 1] = {**source[0].assets, **assets[len(assets) - 1]}
                 else:
                     # Fill the first element so we don't end up with an empty one
                     if len(assets) == 0:
