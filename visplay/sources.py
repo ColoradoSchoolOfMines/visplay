@@ -27,9 +27,12 @@ class LocalSource:
             source_path = as_source['source_path']
             constructors = as_source['construct']
             name = as_source['namespace']
-            self.sources = get_sources_list(source_path, constructors)
-            self.assets = sources_to_asset(name, self.sources)
-            self.playlists = sources_to_play(name, self.sources)
+            with open(source_path) as source_file:
+                # Recursively discover all sources
+                self.sources = get_sources_list(source_file, constructors)
+                # Namespace the assets and playlists
+                self.assets = sources_to_asset(name, self.sources)
+                self.playlists = sources_to_play(name, self.sources)
 
         if as_asset:
             assets_path = as_asset['assets_path']
@@ -40,15 +43,28 @@ class LocalSource:
 
 class HTTPSource:
 
-    def __init__(self, assets_path=None, playlists_path=None):
+    def __init__(self, as_asset=None, as_source=None):
         try:
-            if assets_path is not None:
-                with requests.get(assets_path, verify=False) as remote_file:
-                    self.assets = yaml.load(remote_file.content)
+            self.assets = {}
+            self.playlists = []
+            if as_asset:
+                assets_path = as_asset['assets_path']
+                playlists_path = as_asset['playlists_path']
+                if assets_path:
+                    with requests.get(assets_path, verify=False) as remote_file:
+                        self.assets = yaml.load(remote_file.content)
+                if playlists_path:
+                    with requests.get(playlists_path, verify=False) as remote_file:
+                        self.playlists = yaml.load(remote_file.content)
+            if as_source:
+                source_path = as_source['source_path']
+                constructors = as_source['construct']
+                name = as_source['namespace']
+                with requests.get(source_path, verify=False) as remote_file:
+                    self.sources = get_sources_list(remote_file.content, constructors)
+                    self.assets = sources_to_asset(name, self.sources)
+                    self.playlists = sources_to_play(name, self.sources)
 
         except ConnectionError:
             return {'error': 'URL not available'}
 
-        if playlists_path is not None:
-            with requests.get(playlists_path, verify=False) as remote_file:
-                self.playlists = yaml.load(remote_file.content)

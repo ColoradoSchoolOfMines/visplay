@@ -4,8 +4,7 @@ import yaml
 def get_sources_list(sources_path, source_constructors):
     all_sources = []
 
-    with open(sources_path) as sources_file:
-        config = yaml.load(sources_file)
+    config = yaml.load(sources_path)
 
     # Handle imports
     if 'import' in config:
@@ -35,6 +34,7 @@ def get_sources_list(sources_path, source_constructors):
 
     return all_sources
 
+# Create the necessary namespaces
 def sources_to_asset(name, sources):
     assets = {}
     for source in sources:

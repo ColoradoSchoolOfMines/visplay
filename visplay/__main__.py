@@ -41,10 +41,11 @@ def main():
     # A list of sources following a basic interface. See sources.py
     constructors = {'local': LocalSource, 'http': HTTPSource}
 
-    sources = setupConfig.get_sources_list(
-        config_dict['sources'], constructors)
+    with open(config_dict['sources']) as source_file:
+        sources = setupConfig.get_sources_list(
+            source_file, constructors)
 
-    media.find_and_play(messages, playable_generator(sources, messages))
+        media.find_and_play(messages, playable_generator(sources, messages))
 
 
 if __name__ == '__main__':
