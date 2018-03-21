@@ -30,15 +30,14 @@ class LocalSource:
             with open(source_path) as source_file:
                 # Recursively discover all sources
                 self.sources = get_sources_list(source_file, constructors)
-                # Namespace the assets and playlists
+                # Namespace the assets
                 self.assets = sources_to_asset(name, self.sources)
-                self.playlists = sources_to_play(name, self.sources)
 
         if as_asset:
-            assets_path = as_asset['assets_path']
-            playlists_path = as_asset['playlists_path']
-            self.assets = get_local_yaml(assets_path)
-            self.playlists = get_local_yaml(playlists_path)
+            assets_paths = as_asset['assets_paths']
+            self.assets = {}
+            for asset in assets_paths:
+                self.assets = {**self.assets, **get_local_yaml(asset)}
 
 
 class HTTPSource:
@@ -48,14 +47,10 @@ class HTTPSource:
             self.assets = {}
             self.playlists = []
             if as_asset:
-                assets_path = as_asset['assets_path']
-                playlists_path = as_asset['playlists_path']
-                if assets_path:
-                    with requests.get(assets_path, verify=False) as remote_file:
-                        self.assets = yaml.load(remote_file.content)
-                if playlists_path:
-                    with requests.get(playlists_path, verify=False) as remote_file:
-                        self.playlists = yaml.load(remote_file.content)
+                assets_paths = as_asset['assets_paths']
+                for asset in assets_paths:
+                    with requests.get(asset, verify=False) as remote_file:
+                        self.assets = {**self.assets, **yaml.load(remote_file.content)}
             if as_source:
                 source_path = as_source['source_path']
                 constructors = as_source['construct']
@@ -63,8 +58,6 @@ class HTTPSource:
                 with requests.get(source_path, verify=False) as remote_file:
                     self.sources = get_sources_list(remote_file.content, constructors)
                     self.assets = sources_to_asset(name, self.sources)
-                    self.playlists = sources_to_play(name, self.sources)
 
         except ConnectionError:
             return {'error': 'URL not available'}
-

@@ -34,14 +34,18 @@ def get_sources_list(sources_path, source_constructors):
 
     return all_sources
 
+
 # Create the necessary namespaces
 def sources_to_asset(name, sources):
     assets = {}
     for source in sources:
-        if source.assets:
-            for asset in source.assets:
-                assets[name + ":" + asset] = source.assets[asset]
+        for asset in source.assets:
+            if type(source.assets[asset]) is list:
+                source_asset = source.assets[asset]
+                source_asset[:] = [name + ":" + item for item in source_asset]
+            assets[name + ":" + asset] = source.assets[asset]
     return assets
+
 
 def sources_to_play(name, sources):
     playlists = []

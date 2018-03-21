@@ -11,22 +11,25 @@ def playable_generator(sources, messages):
     """Return a generator that will infinitely return new things to play."""
     running = True
     while running:
-        playlist = []
+        playlist = ['main']
         assets = {}
         prev_priority = -1
-        # Find the assets and playlists in each source
+        # Find the assets in each source and combine them
         for source in sources:
-            if source.playlists and source.priority > prev_priority:
-                playlist = source.playlists
             if source.assets:
                 assets = {**assets, **source.assets}
-        for playable in playlist:
-            # if a message is sent telling this to reload, do it
-            if not messages.empty():
-                message = messages.get_nowait()
-                if 'source' in message:
-                    source = message['source']
-            yield assets[playable]
+
+        # Build and play the stack
+        while playlist:
+            current = playlist.pop()
+            if current in assets:
+                if type(assets[current]) is list:
+                    while assets[current]:
+                        playlist.append(assets[current].pop())
+                else:
+                    yield assets[current]
+            else:
+                print("ERROR finding,", current)
 
 
 def main():
