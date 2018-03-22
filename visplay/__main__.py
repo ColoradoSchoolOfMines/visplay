@@ -42,7 +42,8 @@ def main():
     messages = Queue()
 
     # A list of sources following a basic interface. See sources.py
-    constructors = {'local': LocalSource, 'http': HTTPSource}
+    constructors = {'file': LocalSource, 'http': HTTPSource,
+                    'https': HTTPSource}
 
     with open(config_dict['sources']) as source_file:
         sources = setupConfig.get_sources_list(

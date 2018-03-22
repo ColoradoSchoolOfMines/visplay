@@ -1,5 +1,6 @@
 import yaml
 import requests
+import uri
 from visplay.setupConfig import get_sources_list
 from visplay.setupConfig import sources_to_asset
 from visplay.setupConfig import sources_to_play
@@ -21,43 +22,32 @@ def get_local_yaml(yaml_path):
 
 class LocalSource:
 
-    def __init__(self, as_asset=None, as_source=None):
+    def __init__(self, constructors, name, path: uri.URI):
         self.survive = True
-        if as_source:
-            source_path = as_source['source_path']
-            constructors = as_source['construct']
-            name = as_source['namespace']
+        if constructors:
+            source_path = path.path
             with open(source_path) as source_file:
                 # Recursively discover all sources
                 self.sources = get_sources_list(source_file, constructors)
                 # Namespace the assets
                 self.assets = sources_to_asset(name, self.sources)
-
-        if as_asset:
-            assets_paths = as_asset['assets_paths']
+        else:
             self.assets = {}
-            for asset in assets_paths:
-                self.assets = {**self.assets, **get_local_yaml(asset)}
+            self.assets = get_local_yaml(path.path)
 
 
 class HTTPSource:
 
-    def __init__(self, as_asset=None, as_source=None):
+    def __init__(self, constructors, name, path: uri.URI):
         try:
             self.assets = {}
-            self.playlists = []
-            if as_asset:
-                assets_paths = as_asset['assets_paths']
-                for asset in assets_paths:
-                    with requests.get(asset, verify=False) as remote_file:
-                        self.assets = {**self.assets, **yaml.load(remote_file.content)}
-            if as_source:
-                source_path = as_source['source_path']
-                constructors = as_source['construct']
-                name = as_source['namespace']
-                with requests.get(source_path, verify=False) as remote_file:
+            if constructors:
+                with requests.get(path.base, verify=False) as remote_file:
                     self.sources = get_sources_list(remote_file.content, constructors)
                     self.assets = sources_to_asset(name, self.sources)
+            else:
+                with requests.get(path.path, verify=False) as remote_file:
+                    self.assets = yaml.load(remote_file.content)
 
         except ConnectionError:
             return {'error': 'URL not available'}

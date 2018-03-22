@@ -1,12 +1,6 @@
-- name: local
-  type: local
-  args:
-    assets_path: /home/user/development/ACM/visplay/assets.yaml
-    playlists_path: /home/user/development/ACM/visplay/playlists.yaml
-  priority: 8
-- name: my_server
-  type: http
-  args:
-    assets_path: http://example.com/assets.yaml
-    playlists_path: http://exmaple.com/playlists.yaml
-  priority: 0
+import:
+  - usb: file:/some/path/to/sources.yaml
+  - acm: http://example.com/source.yaml
+add:
+  - file:/another/path/assets.yaml
+  - http://example.net/path/playlists.yaml

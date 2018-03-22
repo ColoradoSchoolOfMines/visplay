@@ -12,7 +12,8 @@ setup(name='visplay',
           'python-mpv',
           'configparser',
           'pyyaml',
-          'requests'
+          'requests',
+          'uri'
       ],
       zip_safe=False,
 

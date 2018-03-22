@@ -1,2 +1,3 @@
-- short
-- hi
+main:
+  - short
+  - hi
