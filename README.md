@@ -32,9 +32,13 @@ python3
 
 python3-pip (pip3)
 
-libmpv / mpv (depends on distro) 
+libmpv / mpv (depends on distro, some bundle them)
 
 youtube-dl
+
+qt5, qmake-qt5
+
+boost-python3
 
 ## Installation
 In the cloned visplay repo run:
