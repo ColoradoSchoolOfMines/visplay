@@ -37,6 +37,11 @@ MpvWidget::MpvWidget(QWidget *parent, Qt::WindowFlags f)
     // Request hw decoding, just for testing.
     mpv::qt::set_option_variant(mpv, "hwdec", "auto");
 
+    // enable youtube-dl support
+    mpv::qt::set_option_variant(mpv, "ytdl", "yes");
+    // adapted from c-api command
+    // mpv_set_option_string(ctx, "ytdl", "yes");
+
     mpv_gl = (mpv_opengl_cb_context *)mpv_get_sub_api(mpv, MPV_SUB_API_OPENGL_CB);
     if (!mpv_gl)
         throw std::runtime_error("OpenGL not compiled in");
