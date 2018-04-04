@@ -52,7 +52,7 @@ In the cloned visplay repo run:
     cd libvisplaygui/
     mkdir build
     cd build
-    qmake-qt5
+    qmake-qt5 ../visplay-gui.pro
     make
     make clean
 
