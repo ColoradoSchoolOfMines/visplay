@@ -24,7 +24,7 @@ If you have already installed, add `--update` to the `pip install` command.
 Visplay by default looks in $XDG_CONFIG_HOME, and the $HOME/.config for visplay.yaml.
 This is the main local configuration and points to any number of assets.yaml files and playlists.yaml files (whether local or remote)
 
-See visplay.yaml.example, assets.yaml.example, and playlists.yaml.example for example configurations.
+See config.yaml.example, sources.yaml.example, assets.yaml.example, and playlists.yaml.example for example configurations.
 
 To create configs:
 
@@ -34,8 +34,7 @@ To create configs:
     cp assets.yaml.example ~/.config/visplay/assets.yaml
     cp playlists.yaml.example ~/.config/visplay/playlists.yaml
 
-    edit ~/.config/visplay.yaml to point to assets.yaml and playlists.yaml
-
+    Replace "USER" in ~/.config/config.yaml, sources.yaml, assets.yaml, and playlists.yaml with your username
     edit assets.yaml to point to valid assets
 
 ## Dependencies
@@ -54,27 +53,23 @@ config.yaml: Points source info, potentailly in the future this can be used to c
 
     sourcename: Directory to sources.yaml
 
-sources.yaml: Points to local and networked asssest and playlist lists
-    
-    - name: local
-      type: local
-      args:
-        assets_path: /home/user/development/ACM/visplay/assets.yaml
-        playlists_path:/home/user/development/ACM/visplay/playlists.yaml
-      priority: 8
-    - name: my_server
-      type: http
-      args:
-        assets_path: http://example.com/assets.yaml
-        playlists_path: http://exmaple.com/playlists.yaml
-      priority: 0
+sources.yaml: Imports sources or adds assets
+   
+    import:
+      - usb: file:/some/path/to/sources.yaml
+      - acm: http://example.com/source.yaml
+    add:
+      - file:/home/USER/.config/visplay/assets.yaml
+      - file:/home/USER/.config/visplay/playlists.yaml
+      - http://example.net/path/playlists.yaml
 
-assets.yaml : Contains File pathes to assets
+assets.yaml: Provides video assets
 
     TheAssetName: local path or url
     CoolestVidEver: https://www.youtube.com/watch?v=dQw4w9WgXcQ
 
-playlists.yaml: Controls control flow for assets
+playlists.yaml: Provides assets that play other assets
 
-    - CoolestVidEver
-    - TheAssetName
+    main:
+      - CoolestVidEver
+      - TheAssetName
