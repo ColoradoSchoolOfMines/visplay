@@ -49,6 +49,13 @@ In the cloned visplay repo run:
     cd visplay
     pip3 install -e . --user
 
+    cd libvisplaygui/
+    mkdir build
+    cd build
+    qmake-qt5
+    make
+    make clean
+
     #create necessary config files as described in "Configuration"
 
 then you can just run `visplay`.
