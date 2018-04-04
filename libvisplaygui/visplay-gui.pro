@@ -28,20 +28,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         visplaygui.cpp \
-    gui.cpp \
-    mpvwidget.cpp \
-    visplaycontroller.cpp
+        gui.cpp \
+        mpvwidget.cpp \
+        visplaycontroller.cpp
 
 HEADERS += \
         visplaygui.h \
-        visplay-gui_global.hbuild-visplay-gui-Desktop-Debug \
-    gui.h \
-    mpvwidget.h \
-    visplaycontroller.h
+        gui.h \
+        mpvwidget.h \
+        visplaycontroller.h
 
 unix {
-    target.path = /usr/lib
-    INSTALLS += target
+        target.path = ../visplay/
+        INSTALLS += target
 }
 
 INCLUDEPATH += /usr/include/python3.6m/
