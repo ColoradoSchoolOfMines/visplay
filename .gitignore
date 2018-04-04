@@ -120,4 +120,4 @@ build-visplay-gui-Desktop-Debug
 
 # libvisplaygui.so
 *.so.1*
-.qmake.stash
+.qmake.stash*
