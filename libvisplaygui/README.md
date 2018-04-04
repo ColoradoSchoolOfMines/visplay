@@ -6,6 +6,16 @@ Wraps a libmpv video output in a Qt widget (thanks to the qt-opengl example
 code in the libmpv repo) and builds a Qt application around it. Future plans
 include allowing metadata display and other advanced windowing operations.
 
+## Compilation
+Run qtcreator, when the big warning dialog comes up about lib visplay **click NO**. Then under build click rebuild all.
+
+To test:
+
+    cd build-visplay-gui-* #if in root visplay folder
+    python3 -i qt_test.py
+    
+If you get a blank black screen then you are good
+
 ## Documentation
 The mpv and Qt instances in this library are designed to be run in a seperate thread (see examples) and then called into using the provided functions, which handle cross thread communication using Qt's signal and slots mechanism.
 

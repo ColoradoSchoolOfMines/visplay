@@ -29,6 +29,8 @@ class Q_DECL_EXPORT VisplayGui : public QObject
         VisplayGui(int argc, char *argv[]);
         ~VisplayGui();
         void display_gui();
+        int argcc = 1;
+        char *argvv[1] = {(char*)"test"};
 
 
 
