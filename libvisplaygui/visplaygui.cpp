@@ -18,7 +18,7 @@
 
 VisplayGui::VisplayGui(int argc, char *argv[])
 {
-    app         = new QApplication(argc, argv);
+    app         = new QApplication(argcc, argvv);
     //win         = new QMainWindow();
     win         = new QWidget;
     vl          = new QVBoxLayout();
