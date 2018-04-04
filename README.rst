@@ -45,8 +45,8 @@ To copy the configurations::
     cp playlists.yaml.example ~/.config/visplay/playlists.yaml
 
 Then replace ``"USER"`` in ``~/.config/config.yaml``, ``sources.yaml``,
-``assets.yaml``, and ``playlists.yaml`` with your username edit ``assets.yaml``
-to point to valid assets.
+``assets.yaml``, and ``playlists.yaml`` with your username. Also, edit
+``assets.yaml`` to point to valid assets.
 
 Dependencies
 ------------
@@ -66,7 +66,7 @@ Yaml Configuration Layout
 
   .. code:: yaml
 
-      sourcename: Directory to sources.yaml
+      source: Directory to sources.yaml
 
 - ``sources.yaml``: Imports sources or adds assets.
 
