@@ -13,7 +13,8 @@ setup(name='visplay',
           'configparser',
           'pyyaml',
           'requests',
-          'uri'
+          'uri',
+          'prompt',
       ],
       zip_safe=False,
 

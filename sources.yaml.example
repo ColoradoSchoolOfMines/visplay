@@ -1,8 +1,0 @@
-# import:
-  # - usb: file:/some/path/to/sources.yaml
-  # - acm: http://example.com/source.yaml
-add:
-  # - file:/another/path/assets.yaml
-  - file:/home/USER/.config/visplay/assets.yaml
-  - file:/home/USER/.config/visplay/playlists.yaml
-  # - http://example.net/path/playlists.yaml
