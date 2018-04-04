@@ -4,6 +4,10 @@ from queue import Queue
 from visplay import media, setupConfig, config
 from visplay.sources import LocalSource, HTTPSource
 
+import libvisplaygui
+from threading import Thread
+from time import sleep
+
 
 def playable_generator(sources, messages):
     """Return a generator that will infinitely return new things to play."""
@@ -53,6 +57,11 @@ def main():
 
     # There are multiple threads so this allows them to communicate
     messages = Queue()
+
+    new_thread = Thread(target=libvisplaygui.init_gui)
+    new_thread.setDaemon(True)
+    new_thread.start()
+    sleep(1)
 
     # A list of sources following a basic interface. See sources.py
     constructors = {'local': LocalSource, 'http': HTTPSource}

@@ -1,4 +1,6 @@
-import mpv
+import libvisplaygui
+from time import sleep
+
 
 # TODO allow passing of message queue in better way
 messengerDic = {}
@@ -9,8 +11,8 @@ def my_log(loglevel, component, message):
     print('[{}] {}: {}'.format(loglevel, component, message))
 
 
-player = mpv.MPV(log_handler=my_log, input_default_bindings=True, ytdl=True,
-                 input_vo_keyboard=True)
+# player = mpv.MPV(log_handler=my_log, input_default_bindings=True, ytdl=True,
+#                  input_vo_keyboard=True)
 
 
 # def callback():
@@ -21,16 +23,16 @@ player = mpv.MPV(log_handler=my_log, input_default_bindings=True, ytdl=True,
 
 
 # Quit on q
-@player.on_key_press('q')
-def my_q_binding():
-    player.quit()
-    messengerDic['queue'].put('quit')
+# @player.on_key_press('q')
+# def my_q_binding():
+#     player.quit()
+#     messengerDic['queue'].put('quit')
 
 
-# Pause on p
-@player.on_key_press('p')
-def my_p_binding():
-    player.pause = not player.pause
+# # Pause on p
+# @player.on_key_press('p')
+# def my_p_binding():
+#     player.pause = not player.pause
 
 
 def find_and_play(messages, generator):
@@ -39,12 +41,14 @@ def find_and_play(messages, generator):
     # Pass the keypress functions the queue
     messengerDic['queue'] = messages
 
-
-    player.fullscreen = True
+    # player.fullscreen = True
 
     # Loop through videos from the generator
     for video in generator:
-        player.play(video)
-        player.wait_for_playback()
+        libvisplaygui.open_media(video)
+        sleep(4)
+        while libvisplaygui.is_playing() == True:
+            pass
+        # player.wait_for_playback()
         if not messages.empty() and messages.get_nowait() == 'quit':
             exit(0)
