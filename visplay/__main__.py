@@ -36,7 +36,8 @@ def playable_generator(sources, messages):
 def main():
     """The main entrypoint for program when run standalone."""
 
-    # Calls the config function to get a dict of settings values
+    # Keep trying to load the configuration until it either explodes
+    # spectacularly or works.
     while True:
         try:
             config_dict = config.load_config_yaml()
