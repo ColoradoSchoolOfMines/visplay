@@ -18,8 +18,7 @@ Installation
         $ cd visplay
         $ pip3 install -e . --user
 
-2. Create necessary configuration files as described in `Configuration`_.
-3. Run `visplay`.
+2. Run ``visplay``. It will prompt you to create the `Default Configuration`_.
 
 .. note::
 
@@ -31,22 +30,19 @@ Configuration
 By default, Visplay looks in ``$XDG_CONFIG_HOME``, and the ``$HOME/.config`` for
 ``visplay/visplay.yaml``. This is the main local configuration and points to
 any number of ``assets.yaml`` files and ``playlists.yaml`` files (whether local
-or remote)
+or remote).
 
-See ``config.yaml.example``, ``sources.yaml.example``, ``assets.yaml.example``,
-and ``playlists.yaml.example`` for example configurations.
+You can use the ``-c`` or ``--config`` parameters to choose what configuration
+file to use.
 
-To copy the configurations::
+Default Configuration
+^^^^^^^^^^^^^^^^^^^^^
 
-    mkdir ~/.config/visplay
-    cp config.yaml.example ~/.config/visplay/config.yaml
-    cp sources.yaml.example ~/.config/visplay/sources.yaml
-    cp assets.yaml.example ~/.config/visplay/assets.yaml
-    cp playlists.yaml.example ~/.config/visplay/playlists.yaml
+To initialize the default configuration, run ``visplay`` without existing
+configuration files. It will ask you if you want to generate the default ones.
 
-Then replace ``"USER"`` in ``~/.config/config.yaml``, ``sources.yaml``,
-``assets.yaml``, and ``playlists.yaml`` with your username. Also, edit
-``assets.yaml`` to point to valid assets.
+If you want to override your existing configuration, delete your existing
+configuration files and run ``visplay``.
 
 Dependencies
 ------------
@@ -66,7 +62,7 @@ Yaml Configuration Layout
 
   .. code:: yaml
 
-      source: Directory to sources.yaml
+      source: <path_to_sources.yaml>
 
 - ``sources.yaml``: Imports sources or adds assets.
 
