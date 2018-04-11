@@ -10,5 +10,11 @@ script:
 - make coverage
 - make html
 
-# deploy if this is master
-#- test $TRAVIS_BRANCH = "master" && make deploy || true
+deploy:
+  provider: pages
+  skip-cleanup: true
+  local_dir: build/html
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  on:
+    branch: master
