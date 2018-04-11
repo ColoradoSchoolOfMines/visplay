@@ -6,11 +6,22 @@
 Welcome to Visplay's documentation!
 ===================================
 
+This project's goal is to make the TV's in the foyer of the buildings of Mines
+display media of ACM's projects. The project uses MPV, python, and C++.
+
+Features
+--------
+
+- Stream videos and open media files using an ``mpv`` implementation.
+
+Contents
+--------
+
 .. toctree::
+   :glob:
    :maxdepth: 2
-   :caption: Contents:
 
-
+   *
 
 Indices and tables
 ==================
