@@ -1,6 +1,5 @@
 from argparse import ArgumentParser
 from os import environ, makedirs, path
-from pathlib import Path
 
 import yaml
 
