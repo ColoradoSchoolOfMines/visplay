@@ -122,7 +122,6 @@ build-visplay-gui-Desktop-Debug
 
 # build files
 .qmake.stash*
-Makefile
 libvisplaygui/build
 
 *.orig
