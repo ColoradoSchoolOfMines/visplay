@@ -59,9 +59,9 @@ class HTTPSource(Source):
 class PathSource(Source):
     """Allow users to specify a path as a source.
 
-    If the path is a directory, it will check for any ``.yaml`` file and load
-    it as an asset. All other files will be loaded as an asset with the
-    filename as the name of the asset.
+    If the path is a directory, it will load all ``*.sources.yaml`` files as
+    sources, and all other ``.yaml`` files as assets.  All non-YAML files will
+    be loaded as assets asset with the filename as the name of the asset.
 
     If the path is a file, it will be added as an asset with the filename as
     the name of the asset.
@@ -74,7 +74,7 @@ class PathSource(Source):
         if not os.path.exists(path):
             raise Exception(f'{path} does not exist.')
 
-        for file in os.listdir(path) if os.path.isdir(path) else [path]:
+        for file in (os.listdir(path) if os.path.isdir(path) else [path]):
             file_path = path.joinpath(file)
 
             if file_path.suffix == '.yaml':
