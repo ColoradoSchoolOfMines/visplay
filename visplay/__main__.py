@@ -5,7 +5,7 @@ import prompt
 
 from visplay import config, media, setupConfig
 from visplay.setupConfig import sources_to_asset, sources_to_play
-from visplay.sources import HTTPSource, LocalSource
+from visplay.sources import HTTPSource, LocalSource, PathSource
 
 
 def playable_generator(sources, messages):
@@ -66,6 +66,7 @@ def main():
         'file': LocalSource,
         'http': HTTPSource,
         'https': HTTPSource,
+        'path': PathSource,
     }
 
     with open(config_dict['sources']) as source_file:
