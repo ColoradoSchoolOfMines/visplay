@@ -1,16 +1,15 @@
+.. Highlight as YAML by default
+.. highlight:: yaml
+
 Yaml Configuration Layout
 =========================
 
 - ``config.yaml``: Points source info, potentially in the future this can be
-  used to configure other options.
-
-  .. code:: yaml
+  used to configure other options::
 
       source: <path_to_sources.yaml>
 
-- ``sources.yaml``: Imports sources or adds assets.
-
-  .. code:: yaml
+- ``sources.yaml``: Imports sources or adds assets::
 
       import:
         usb: file:/some/path/to/sources.yaml
@@ -20,16 +19,17 @@ Yaml Configuration Layout
         - file:/home/USER/.config/visplay/playlists.yaml
         - http://example.net/path/playlists.yaml
 
-- ``assets.yaml``: Provides video assets.
+  Supported source types:
 
-  .. code:: yaml
+  - ``file`` and ``path``: imports from a path (supports files and directories)
+  - ``http`` and ``https``: imports from a URL
 
-      TheAssetName: local path or url
+- ``assets.yaml``: Provides video assets::
+
+      TheAssetName: <local_path_or_url>
       CoolestVidEver: https://www.youtube.com/watch?v=dQw4w9WgXcQ
 
-- ``playlists.yaml``: Provides assets that play other assets.
-
-  .. code:: yaml
+- ``playlists.yaml``: Provides assets that play other assets::
 
       main:
         - CoolestVidEver

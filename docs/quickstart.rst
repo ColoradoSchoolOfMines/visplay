@@ -10,10 +10,10 @@ Dependencies
 Make sure that you have the following installed and available on your system's
 ``PATH``.
 
-- Python 3 (probably something like `python3` in your package manager)
-- Pip 3 (probably something like `python3-pip` in your package manager)
+- Python 3 (probably something like ``python3`` in your package manager)
+- Pip 3 (probably something like ``python3-pip`` in your package manager)
 - ``libmpv`` and ``mpv`` (depends on your package manager)
-- ``youtube-dl``
+- ``youtube-dl`` (depends on your package manager)
 
 Installation
 ------------
@@ -28,7 +28,8 @@ Installation
 
 .. note::
 
-    If you have already installed, add `--update` to the `pip install` command.
+    If you have already installed, add ``--update`` to the ``pip install``
+    command.
 
 Configuration
 -------------
