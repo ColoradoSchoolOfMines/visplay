@@ -19,7 +19,7 @@ def create_default_config():
         print(f'Folder {_config_folder} created')
 
     # Store the paths to the default locations.
-    default_sources = path.join(_config_folder, 'sources.yaml')
+    default_sources = path.join(_config_folder, 'root.sources.yaml')
     default_assets = path.join(_config_folder, 'assets.yaml')
     default_playlists = path.join(_config_folder, 'playlists.yaml')
 

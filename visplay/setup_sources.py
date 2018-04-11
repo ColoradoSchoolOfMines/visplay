@@ -1,8 +1,9 @@
-import yaml
 import uri
+import yaml
 
 
-def get_sources_list(sources_path, constructors):
+def get_sources_list(sources_path):
+    from visplay.sources import source_constructors as c
     all_sources = []
 
     config = yaml.load(sources_path)
@@ -12,7 +13,7 @@ def get_sources_list(sources_path, constructors):
         for name in config['import']:
             source = config['import'][name]
             path = uri.URI(source)
-            new_source = constructors[str(path.scheme)](constructors, name, path)
+            new_source = c[str(path.scheme)](name, path, is_source=True)
             all_sources.append(new_source)
 
     if 'add' in config:
@@ -20,7 +21,7 @@ def get_sources_list(sources_path, constructors):
         # with the arguments provided, then appends to the list
         for source in config['add']:
             path = uri.URI(source)
-            new_source = constructors[str(path.scheme)](None, source, path)
+            new_source = c[str(path.scheme)](source, path)
             all_sources.append(new_source)
 
     return all_sources

@@ -2,10 +2,8 @@
 from queue import Queue
 
 import prompt
-
-from visplay import config, media, setupConfig
-from visplay.setupConfig import sources_to_asset, sources_to_play
-from visplay.sources import HTTPSource, LocalSource, PathSource
+from visplay import config, media
+from visplay.setup_sources import get_sources_list
 
 
 def playable_generator(sources, messages):
@@ -14,11 +12,11 @@ def playable_generator(sources, messages):
     while running:
         playlist = ['main']
         assets = {}
-        prev_priority = -1
+
         # Find the assets in each source and combine them
         for source in sources:
             if source.assets:
-                assets = {**assets, **source.assets}
+                assets.update(source.assets)
 
         # Build and play the stack
         while playlist:
@@ -61,16 +59,8 @@ def main():
     # There are multiple threads so this allows them to communicate
     messages = Queue()
 
-    # A list of sources following a basic interface. See sources.py
-    constructors = {
-        'file': LocalSource,
-        'http': HTTPSource,
-        'https': HTTPSource,
-        'path': PathSource,
-    }
-
     with open(config_dict['sources']) as source_file:
-        sources = setupConfig.get_sources_list(source_file, constructors)
+        sources = get_sources_list(source_file)
 
         media.find_and_play(messages, playable_generator(sources, messages))
 

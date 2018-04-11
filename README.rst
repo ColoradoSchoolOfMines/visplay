@@ -69,8 +69,8 @@ Yaml Configuration Layout
   .. code:: yaml
 
       import:
-        - usb: file:/some/path/to/sources.yaml
-        - acm: http://example.com/source.yaml
+        usb: file:/some/path/to/sources.yaml
+        acm: http://example.com/source.yaml
       add:
         - file:/home/USER/.config/visplay/assets.yaml
         - file:/home/USER/.config/visplay/playlists.yaml
