@@ -1,6 +1,3 @@
-*.orig
-*.so.*
-
 # Created by https://www.gitignore.io/api/python
 
 ### Python ###
@@ -10,7 +7,7 @@ __pycache__/
 *$py.class
 
 # C extensions
-*.so
+*.so.*
 
 # Distribution / packaging
 .Python
@@ -116,3 +113,16 @@ assets.yaml
 playlists.yaml
 config.yaml
 sources.yaml
+
+# qtcreator
+build-visplay-gui-Desktop-Debug
+
+# libvisplaygui.so
+*.so.1*
+
+# build files
+.qmake.stash*
+Makefile
+libvisplaygui/build
+
+*.orig

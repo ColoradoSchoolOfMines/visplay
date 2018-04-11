@@ -1,0 +1,12 @@
+#ifndef VISPLAYGUI_GLOBAL_H
+#define VISPLAYGUI_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(VISPLAYGUI_LIBRARY)
+#  define VISPLAYGUISHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define VISPLAYGUISHARED_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // VISPLAYGUI_GLOBAL_H
