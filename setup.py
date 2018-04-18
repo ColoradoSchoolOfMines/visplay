@@ -1,8 +1,13 @@
 from setuptools import setup
-from sphinx.setup_command import BuildDoc
 
-# Allow building sphinx documentation.
-cmdclass = {'build_sphinx': BuildDoc}
+cmdclass = {}
+try:
+    from sphinx.setup_command import BuildDoc
+
+    # Allow building sphinx documentation.
+    cmdclass = {'build_sphinx': BuildDoc}
+except ImportError:
+    pass
 
 name = 'visplay'
 version = '0.1'
@@ -24,6 +29,8 @@ setup(
         'requests',
         'uri',
         'prompt',
+        'ipfsapi',
+        'sphinx',
     ],
     zip_safe=False,
 

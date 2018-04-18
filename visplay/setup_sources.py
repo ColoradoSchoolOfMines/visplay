@@ -2,26 +2,26 @@ import uri
 import yaml
 
 
-def get_sources_list(sources_path):
-    from visplay.sources import source_constructors as c
+def get_sources_list(source_stream):
+    from visplay.sources import source_constructors as sc
     all_sources = []
 
-    config = yaml.load(sources_path)
+    sources_yaml = yaml.load(source_stream)
 
     # Handle imports
-    if 'import' in config:
-        for name in config['import']:
-            source = config['import'][name]
+    if 'import' in sources_yaml and sources_yaml['import']:
+        for name in sources_yaml['import']:
+            source = sources_yaml['import'][name]
             path = uri.URI(source)
-            new_source = c[str(path.scheme)](name, path, is_source=True)
+            new_source = sc[str(path.scheme)](name, path, is_import=True)
             all_sources.append(new_source)
 
-    if 'add' in config:
+    if 'add' in sources_yaml and sources_yaml['add']:
         # calls the corresponding source constructor (LocalSource/HTTPSource)
         # with the arguments provided, then appends to the list
-        for source in config['add']:
+        for source in sources_yaml['add']:
             path = uri.URI(source)
-            new_source = c[str(path.scheme)](source, path)
+            new_source = sc[str(path.scheme)](source, path)
             all_sources.append(new_source)
 
     return all_sources

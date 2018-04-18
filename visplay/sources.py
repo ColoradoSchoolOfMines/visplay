@@ -1,14 +1,18 @@
 import os
 from pathlib import Path
 
+import ipfsapi as ipfs
 import requests
 import uri
 import yaml
+from ipfsapi import exceptions
 
 from visplay.setup_sources import get_sources_list, sources_to_asset
 
 # Every source needs to say whether the files it gets survive after an error,
 # how to get an asset file, and how to get a playlist file.
+
+ipfs_api = ipfs.connect(host='127.0.0.1', port=8080)
 
 
 def get_local_yaml(yaml_path):
@@ -27,33 +31,49 @@ class Source:
     do the loading of the source.
     """
 
-    def __init__(self, name, uri: uri.URI, is_source=False):
+    def __init__(self, name, uri: uri.URI, is_import=False):
         """Initialize a source.
 
         Arguments:
         """
         self.assets = {}
         self.sources = []
-        self.is_source = is_source
+        self.layout = None
+        self.is_import = is_import
 
     def __repr__(self):
         return f'<{type(self).__name__} assets={self.assets} sources={self.sources}>'
 
 
 class HTTPSource(Source):
-    def __init__(self, name, uri: uri.URI, is_source=False):
-        super().__init__(name, uri)
+    def __init__(self, name, uri: uri.URI, is_import=False):
+        super().__init__(name, uri, is_import=is_import)
         try:
-            if self.is_source:
+            if self.is_import:
                 with requests.get(uri.base, verify=False) as remote_file:
                     self.sources = get_sources_list(remote_file.content)
                     self.assets = sources_to_asset(name, self.sources)
+                    self.layout = None
             else:
                 with requests.get(uri.path, verify=False) as remote_file:
                     self.assets = yaml.load(remote_file.content)
 
         except ConnectionError:
             return {'error': 'URL not available'}
+
+
+class IPFSSource(Source):
+    """Allow users to specify an IPFS hash as a source.
+
+    If the source
+    """
+
+    def __init__(self, name, uri: uri.URI, is_import=False):
+        super().__init__(name, uri, is_import=is_import)
+        try:
+            print(ipfs_api.cat(uri.path))
+        except exceptions.Error as e:
+            print(e)
 
 
 class PathSource(Source):
@@ -67,8 +87,8 @@ class PathSource(Source):
     the name of the asset.
     """
 
-    def __init__(self, name, uri: uri.URI, is_source=False):
-        super().__init__(name, uri)
+    def __init__(self, name, uri: uri.URI, is_import=False):
+        super().__init__(name, uri, is_import=is_import)
         path = Path(uri.path)
 
         if not os.path.exists(path):
@@ -78,7 +98,7 @@ class PathSource(Source):
             file_path = path.joinpath(file)
 
             if file_path.suffix == '.yaml':
-                if self.is_source and '.sources' in file_path.suffixes:
+                if self.is_import and '.sources' in file_path.suffixes:
                     with open(file_path) as source_file:
                         # Recursively discover all sources
                         self.sources += get_sources_list(source_file)
@@ -86,6 +106,7 @@ class PathSource(Source):
                         # Namespace the assets
                         self.assets.update(
                             sources_to_asset(name, self.sources))
+                        self.layout = None
                 else:
                     self.assets.update(get_local_yaml(file_path))
             else:
@@ -97,5 +118,6 @@ source_constructors = {
     'file': PathSource,
     'http': HTTPSource,
     'https': HTTPSource,
+    'ipfs': IPFSSource,
     'path': PathSource,
 }
