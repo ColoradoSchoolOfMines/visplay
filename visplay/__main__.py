@@ -64,7 +64,7 @@ def main():
     # There are multiple threads so this allows them to communicate
     messages = Queue()
 
-    if config_dict['libvisplaygui']:
+    if config_dict.get('libvisplaygui', False):
         gui_thread = Thread(target=libvisplaygui.init_gui)
         gui_thread.daemon = True
         gui_thread.start()
@@ -75,8 +75,9 @@ def main():
         media.find_and_play(
             messages,
             playable_generator(sources, messages),
-            config_dict['libvisplaygui'],
+            config_dict.get('libvisplaygui', False),
         )
+
 
 if __name__ == '__main__':
     main()
