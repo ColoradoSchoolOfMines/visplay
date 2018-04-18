@@ -28,8 +28,10 @@ def playable_generator(sources, messages):
             current = playlist.pop()
             if current in assets:
                 if type(assets[current]) is list:
-                    while assets[current]:
-                        playlist.append(assets[current].pop())
+                    for asset in reversed(assets[current]):
+                        playlist.append(asset)
+                elif assets[current] in assets:
+                    playlist.append(assets[assets[current]])
                 else:
                     yield assets[current]
             else:
