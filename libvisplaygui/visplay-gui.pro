@@ -6,7 +6,7 @@
 
 QT       += widgets opengl svg webkit webkitwidgets dbus
 
-LIBS     += -lboost_python3 -lpython3 -lmpv
+LIBS     += -lboost_thread -lboost_python3 -lpython3 -lmpv
 
 CONFIG   += no_keywords
 

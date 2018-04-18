@@ -1,7 +1,10 @@
 #include "mpvwidget.h"
+#include "visplaygui.h"
+#include <iostream>
 #include <stdexcept>
 #include <QtGui/QOpenGLContext>
 #include <QtCore/QMetaObject>
+
 
 static void wakeup(void *ctx)
 {
@@ -101,6 +104,7 @@ void MpvWidget::swapped()
 void MpvWidget::on_mpv_events()
 {
     // Process all events, until the event queue is empty.
+
     while (mpv) {
         mpv_event *event = mpv_wait_event(mpv, 0);
         if (event->event_id == MPV_EVENT_NONE) {
@@ -112,12 +116,15 @@ void MpvWidget::on_mpv_events()
 
 void MpvWidget::handle_mpv_event(mpv_event *event)
 {
+    //std::cout << "event: " << event->event_id << std::endl;
     switch (event->event_id) {
     case MPV_EVENT_PROPERTY_CHANGE: {
         mpv_event_property *prop = (mpv_event_property *)event->data;
+        //std::cout << "prop: " << prop->name << std::endl;
         if (strcmp(prop->name, "time-pos") == 0) {
             if (prop->format == MPV_FORMAT_DOUBLE) {
                 double time = *(double *)prop->data;
+
                 Q_EMIT positionChanged(time);
             }
         } else if (strcmp(prop->name, "duration") == 0) {
@@ -127,6 +134,9 @@ void MpvWidget::handle_mpv_event(mpv_event *event)
             }
         }
         break;
+    }
+    case MPV_EVENT_IDLE: {
+        Q_EMIT playback_idle();
     }
     default: ;
         // Ignore uninteresting or unknown events.

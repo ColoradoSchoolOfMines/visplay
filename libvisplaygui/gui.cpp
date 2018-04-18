@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <boost/python.hpp>
+#include <boost/thread/latch.hpp>
 
 #include <visplaygui.h>
 #include <visplaycontroller.h>
@@ -22,6 +23,16 @@ void init_gui()
     int argc = 1;
     char *argv[] = {"test"};
     gui = new VisplayGui(argc, argv);
+    controller = new VisplayController;
+    boost::latch *ready_latch    = new boost::latch(1);
+    boost::latch *playback_latch = new boost::latch(1);
+
+
+    gui->playback_latch = playback_latch;
+    gui->ready_latch = ready_latch;
+    controller->playback_latch = playback_latch;
+    controller->ready_latch = ready_latch;
+
     setup_signals();
 
     gui->display_gui();
@@ -33,20 +44,27 @@ void init_gui()
     m_thread_state = NULL;
 }
 
+void wait_until_ready()
+{
+   while(controller->ready_latch == NULL);
+   controller->ready_latch->wait();
+}
+
 void open_media(std::string file_path)
 {
     Q_EMIT controller->open_media(file_path);
+
+    controller->playback_latch->reset(1);
+
 }
 
-bool is_playing() {
-    QVariant time = gui->mpv_widget->getProperty("time-remaining");
+void wait_for_playback() {
 
-    return time.toDouble() > 0;
+    controller->playback_latch->wait();
 }
 
 void setup_signals()
 {
-    controller = new VisplayController;
 
     QObject::connect(controller, &VisplayController::open_media, gui, &VisplayGui::open_media);
 
@@ -59,7 +77,8 @@ void setup_signals()
 BOOST_PYTHON_MODULE(libvisplaygui)
 {
     using namespace boost::python;
-    def("init_gui",    init_gui);
-    def("open_media",  open_media);
-    def("is_playing",  is_playing);
+    def("init_gui",             init_gui);
+    def("open_media",           open_media);
+    def("wait_for_playback",    wait_for_playback);
+    def("wait_until_ready",     wait_until_ready);
 }

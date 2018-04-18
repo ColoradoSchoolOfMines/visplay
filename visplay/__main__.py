@@ -1,11 +1,14 @@
 """Main entrypoint for Visplay."""
 from queue import Queue
+from threading import Thread
+from time import sleep
 
 import prompt
 
 from visplay import config, media, setupConfig
 from visplay.setupConfig import sources_to_asset, sources_to_play
 from visplay.sources import HTTPSource, LocalSource
+import libvisplaygui
 
 
 def playable_generator(sources, messages):
@@ -68,10 +71,19 @@ def main():
         'https': HTTPSource,
     }
 
+    if config_dict['libvisplaygui']:
+        gui_thread = Thread(target=libvisplaygui.init_gui)
+        gui_thread.setDaemon(True)
+        gui_thread.start()
+        sleep(2)
+
     with open(config_dict['sources']) as source_file:
         sources = setupConfig.get_sources_list(source_file, constructors)
-
-        media.find_and_play(messages, playable_generator(sources, messages))
+        media.find_and_play(
+            messages,
+            playable_generator(sources, messages),
+            config_dict['libvisplaygui'],
+        )
 
 
 if __name__ == '__main__':

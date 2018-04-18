@@ -1,4 +1,5 @@
 import mpv
+import libvisplaygui
 
 # TODO allow passing of message queue in better way
 messengerDic = {}
@@ -33,18 +34,23 @@ def my_p_binding():
     player.pause = not player.pause
 
 
-def find_and_play(messages, generator):
+def find_and_play(messages, generator, libvisplaygui_enabled=False):
     '''find_and_play: gets videos from the generator and plays them'''
 
     # Pass the keypress functions the queue
     messengerDic['queue'] = messages
 
-
     player.fullscreen = True
 
     # Loop through videos from the generator
     for video in generator:
-        player.play(video)
-        player.wait_for_playback()
+
+        if libvisplaygui_enabled:
+            libvisplaygui.open_media(video)
+            libvisplaygui.wait_for_playback()
+        else:
+            player.play(video)
+            player.wait_for_playback()
+
         if not messages.empty() and messages.get_nowait() == 'quit':
             exit(0)

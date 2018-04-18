@@ -6,6 +6,9 @@
 
 void init_gui();
 void run_gui();
+bool is_ready();
 void setup_signals();
 
 Q_DECLARE_METATYPE(std::string);
+
+//Q_DECLARE_METATYPE(boost::latch);

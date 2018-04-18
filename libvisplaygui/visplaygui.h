@@ -16,6 +16,7 @@
 
 #include <string>
 #include <boost/python.hpp>
+#include <boost/thread/latch.hpp>
 
 #include <unistd.h>
 #include <mpv/client.h>
@@ -43,11 +44,15 @@ class Q_DECL_EXPORT VisplayGui : public QObject
         QPointer<MpvWidget>         mpv_widget;
         QPointer<QVBoxLayout>       vl;
 
+        boost::latch               *playback_latch;
+        boost::latch               *ready_latch;
+
     public Q_SLOTS:
         void open_media(std::string file_path);
+        void playback_idle();
 
 
-
+    Q_SIGNALS:
 
 
 };

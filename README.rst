@@ -57,12 +57,13 @@ Documentation
 Yaml Configuration Layout
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- ``config.yaml``: Points source info, potentially in the future this can be
-  used to configure other options.
+- ``config.yaml``: Points source info, controls playback backend, 
+  potentially in the future this can be used to configure other options.
 
   .. code:: yaml
 
       source: <path_to_sources.yaml>
+      libvisplaygui: False/True
 
 - ``sources.yaml``: Imports sources or adds assets.
 
