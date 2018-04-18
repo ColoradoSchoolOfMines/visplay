@@ -11,5 +11,5 @@ from threading import Thread
 
 
 new_thread = Thread(target=libvisplaygui.init_gui)
-new_thread.setDaemon(True)
+new_thread.daemon = True
 new_thread.start()

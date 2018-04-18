@@ -12,7 +12,7 @@ from visplay.setup_sources import get_sources_list, sources_to_asset
 # Every source needs to say whether the files it gets survive after an error,
 # how to get an asset file, and how to get a playlist file.
 
-ipfs_api = ipfs.connect(host='127.0.0.1', port=8080)
+# ipfs_api = ipfs.connect(host='127.0.0.1', port=8080)
 
 
 def get_local_yaml(yaml_path):

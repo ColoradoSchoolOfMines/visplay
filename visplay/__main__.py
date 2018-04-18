@@ -4,16 +4,11 @@ from threading import Thread
 from time import sleep
 
 import prompt
-<<<<<<< HEAD
 
-from visplay import config, media, setupConfig
-from visplay.setupConfig import sources_to_asset, sources_to_play
-from visplay.sources import HTTPSource, LocalSource
 import libvisplaygui
-=======
+
 from visplay import config, media
 from visplay.setup_sources import get_sources_list
->>>>>>> dc13e22dee910bcdb98eef74ea929e0efefd590e
 
 
 def playable_generator(sources, messages):
@@ -71,12 +66,12 @@ def main():
 
     if config_dict['libvisplaygui']:
         gui_thread = Thread(target=libvisplaygui.init_gui)
-        gui_thread.setDaemon(True)
+        gui_thread.daemon = True
         gui_thread.start()
         sleep(2)
 
     with open(config_dict['sources']) as source_file:
-        sources = setupConfig.get_sources_list(source_file)
+        sources = get_sources_list(source_file)
         media.find_and_play(
             messages,
             playable_generator(sources, messages),
