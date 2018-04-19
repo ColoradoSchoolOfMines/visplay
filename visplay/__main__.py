@@ -40,11 +40,7 @@ def playable_generator(sources, messages):
 def main():
     """The main entrypoint for program when run standalone."""
 
-    # Parse Arguments
-
-    # def load_config_yaml():
-    #     """Loads config.yaml based on provided arguments or default location."""
-
+    # CLI Arguments
     parser = ArgumentParser()
     parser.add_argument(
         '-c',
@@ -55,6 +51,7 @@ def main():
         help='Specify a custom configuration file to load.',
     )
 
+    # Get the arguments
     args = parser.parse_args()
 
     # Keep trying to load the configuration until it either explodes
