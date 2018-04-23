@@ -1,12 +1,9 @@
 language: python
 python: 3.6
 cache: pip
-addons:
-  apt:
-    packages:
-      - mpv
-      - libmpv-dev
-      - youtube-dl
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y mpv
 install:
   - pip install --upgrade pip
   - pip install .
