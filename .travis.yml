@@ -6,6 +6,7 @@ addons:
     packages:
       - mpv
       - libmpv-dev
+      - youtube-dl
 install:
   - pip install --upgrade pip
   - pip install .
