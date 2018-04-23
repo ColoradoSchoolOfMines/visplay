@@ -1,14 +1,18 @@
 language: python
 python: 3.6
 cache: pip
+addons:
+  apt:
+    packages:
+      - mpv
+      - libmpv-dev
 install:
-- pip install --upgrade pip
-- pip install -r requirements.txt
+  - pip install --upgrade pip
+  - pip install .
 script:
-# this tests to make sure that it builds properly
-- make doctest
-- make coverage
-- make html
+  - make doctest
+  - make coverage
+  - make html
 
 deploy:
   provider: pages
