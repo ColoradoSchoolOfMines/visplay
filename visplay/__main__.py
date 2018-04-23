@@ -1,4 +1,5 @@
 """Main entrypoint for Visplay."""
+from argparse import ArgumentParser
 from queue import Queue
 from threading import Thread
 from time import sleep
@@ -6,8 +7,8 @@ from time import sleep
 import prompt
 
 import libvisplaygui
-
-from visplay import config, media
+from visplay import media
+from visplay.config import Config
 from visplay.setup_sources import get_sources_list
 
 
@@ -41,11 +42,25 @@ def playable_generator(sources, messages):
 def main():
     """The main entrypoint for program when run standalone."""
 
+    # CLI Arguments
+    parser = ArgumentParser()
+    parser.add_argument(
+        '-c',
+        '--config',
+        dest='config',
+        type=open,
+        default=Config.default_config,
+        help='Specify a custom configuration file to load.',
+    )
+
+    # Get the arguments
+    args = parser.parse_args()
+
     # Keep trying to load the configuration until it either explodes
     # spectacularly or works.
     while True:
         try:
-            config_dict = config.load_config_yaml()
+            Config.load_from_yaml(args.config)
         except Exception as e:
             print(f'There was an error getting the configuration:\n\t{e}\n')
             print('Would you like to')
@@ -58,7 +73,7 @@ def main():
             if response.string == '1':
                 exit(0)
             else:
-                config.create_default_config()
+                Config.create_default_config()
         else:
             # If everything worked, then we can proceed
             break
@@ -66,18 +81,21 @@ def main():
     # There are multiple threads so this allows them to communicate
     messages = Queue()
 
-    if config_dict.get('libvisplaygui', False):
+    if Config.get('libvisplaygui'):
         gui_thread = Thread(target=libvisplaygui.init_gui)
         gui_thread.daemon = True
         gui_thread.start()
         sleep(2)
 
-    with open(config_dict['sources']) as source_file:
+    if not Config.get('sources'):
+        raise KeyError('No sources found in configuration file.')
+
+    with open(Config.sources) as source_file:
         sources = get_sources_list(source_file)
         media.find_and_play(
             messages,
             playable_generator(sources, messages),
-            config_dict.get('libvisplaygui', False),
+            Config.get('libvisplaygui', False),
         )
 
 
