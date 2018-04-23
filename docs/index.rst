@@ -12,7 +12,7 @@ display media of ACM's projects. The project uses MPV, python, and C++.
 Features
 --------
 
-- Stream videos and open media files using an ``mpv`` implementation.
+- Stream videos and open media files using ``mpv``.
 
 Contents
 --------
@@ -21,7 +21,10 @@ Contents
    :glob:
    :maxdepth: 2
 
-   *
+   quickstart.rst
+   config-layout.rst
+   project-organization.rst
+   api/visplay.rst
 
 Indices and tables
 ==================
