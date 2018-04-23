@@ -7,12 +7,11 @@ import uri
 import yaml
 from ipfsapi import exceptions
 
+from visplay.config import Config
 from visplay.setup_sources import get_sources_list, sources_to_asset
 
 # Every source needs to say whether the files it gets survive after an error,
 # how to get an asset file, and how to get a playlist file.
-
-# ipfs_api = ipfs.connect(host='127.0.0.1', port=8080)
 
 
 def get_local_yaml(yaml_path):
@@ -38,11 +37,17 @@ class Source:
         """
         self.assets = {}
         self.sources = []
-        self.layout = None
         self.is_import = is_import
 
     def __repr__(self):
         return f'<{type(self).__name__} assets={self.assets} sources={self.sources}>'
+
+    def _from_stream(name, stream):
+        sources = get_sources_list(stream)
+
+        # Namespace the assets
+        assets = sources_to_asset(name, sources)
+        return (sources, assets)
 
 
 class HTTPSource(Source):
@@ -51,9 +56,8 @@ class HTTPSource(Source):
         try:
             if self.is_import:
                 with requests.get(uri.base, verify=False) as remote_file:
-                    self.sources = get_sources_list(remote_file.content)
-                    self.assets = sources_to_asset(name, self.sources)
-                    self.layout = None
+                    self.sources, self.assets = self._from_stream(
+                        name, remote_file.content)
             else:
                 with requests.get(uri.path, verify=False) as remote_file:
                     self.assets = yaml.load(remote_file.content)
@@ -71,7 +75,28 @@ class IPFSSource(Source):
     def __init__(self, name, uri: uri.URI, is_import=False):
         super().__init__(name, uri, is_import=is_import)
         try:
-            print(ipfs_api.cat(uri.path))
+            ipfs_config = Config.get('ipfs_config')
+            ipfs_api = ipfs.connect(
+                host=ipfs_config.get('host'),
+                port=ipfs_config.get('port'),
+            )
+        except exceptions.ConnectionError as e:
+            raise ConnectionError(f'Could not connect to IPFS.') from e
+
+        try:
+            file_info = ipfs_api.ls(uri.path)
+
+            for obj in file_info.get('Objects'):
+                print(obj)
+                if len(obj.get('Links', [])) > 0:
+                    for link in obj['Links']:
+                        print(link)
+                    # directory
+                    pass
+                else:
+                    # file
+                    file = ipfs_api.cat(uri.path).decode()
+                    print(file)
         except exceptions.Error as e:
             print(e)
 
@@ -92,7 +117,7 @@ class PathSource(Source):
         path = Path(uri.path)
 
         if not os.path.exists(path):
-            raise Exception(f'{path} does not exist.')
+            raise IOError(f'{path} does not exist.')
 
         for file in (os.listdir(path) if os.path.isdir(path) else [path]):
             file_path = path.joinpath(file)
@@ -101,12 +126,9 @@ class PathSource(Source):
                 if self.is_import and '.sources' in file_path.suffixes:
                     with open(file_path) as source_file:
                         # Recursively discover all sources
-                        self.sources += get_sources_list(source_file)
-
-                        # Namespace the assets
-                        self.assets.update(
-                            sources_to_asset(name, self.sources))
-                        self.layout = None
+                        sources, assets = self._from_stream(name, source_file)
+                        self.sources += sources
+                        self.assets.update(assets)
                 else:
                     self.assets.update(get_local_yaml(file_path))
             else:

@@ -27,6 +27,6 @@ deploy:
   skip-cleanup: true
   local_dir: build/html
   github-token: $GITHUB_TOKEN
-  keep-history: true
+  keep-history: false  # Don't keep track of previous documentation versions
   on:
     branch: master
