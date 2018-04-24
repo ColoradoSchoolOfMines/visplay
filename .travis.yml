@@ -1,9 +1,12 @@
 language: python
 python: 3.6
 cache: pip
-before_install:
-  - sudo apt-get -qq update
-  - sudo apt-get install -y mpv
+addons:
+  apt:
+    sources:
+      - sourceline: 'ppa:mc3man/mpv-tests'
+    packages:
+      - mpv
 install:
   - pip install --upgrade pip
   - pip install .
