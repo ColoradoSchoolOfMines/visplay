@@ -1,0 +1,852 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="11in"
+   height="8.5in"
+   viewBox="0 0 11 8.5"
+   version="1.1"
+   id="SVGRoot"
+   inkscape:version="0.92.2 2405546, 2018-03-11"
+   sodipodi:docname="architecture.svg">
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="316.41027"
+     inkscape:cy="442.48199"
+     inkscape:document-units="in"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="2852"
+     inkscape:window-height="1727"
+     inkscape:window-x="14"
+     inkscape:window-y="59"
+     inkscape:window-maximized="0" />
+  <defs
+     id="defs3713">
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker12066"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path12064"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker11930"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path11928" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker11733"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         id="path11731"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.8) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible;"
+       id="marker8168"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend">
+      <path
+         transform="scale(0.8) rotate(180) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path8166" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible;"
+       id="marker6666"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:collect="always">
+      <path
+         transform="scale(0.8) rotate(180) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path6664" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible;"
+       id="marker6596"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend">
+      <path
+         transform="scale(0.8) rotate(180) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path6594" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker6520"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:collect="always">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path6518" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker6462"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path6460" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker6410"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path6408" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lend"
+       style="overflow:visible;"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         id="path4683"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lstart"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         id="path4680"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.8) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lstart-9"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4680-0"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(0.8,0,0,0.8,10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-8"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4683-9"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lstart-8"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4680-4"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(0.8,0,0,0.8,10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-5"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4683-6"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker6520-4"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path6518-3" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker8168-5"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path8166-6" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker6520-40"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path6518-31" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker8168-2"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path8166-7" />
+    </marker>
+  </defs>
+  <metadata
+     id="metadata3716">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:0.41666681px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.01041667"
+       x="1.2202386"
+       y="6.9077406"
+       id="text4552"><tspan
+         sodipodi:role="line"
+         id="tspan4550"
+         x="1.2202386"
+         y="7.2769279"
+         style="stroke-width:0.01041667" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:0.41666681px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.01041667"
+       x="7.1056571"
+       y="5.7693467"
+       id="text4556"><tspan
+         sodipodi:role="line"
+         id="tspan4554"
+         x="7.1056571"
+         y="6.1385341"
+         style="stroke-width:0.01041667" /></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4652"
+       style="fill:black;fill-opacity:1;stroke:none;font-family:Arial;font-style:normal;font-weight:normal;font-size:26.66666667px;line-height:1.25;letter-spacing:0px;word-spacing:0px;-inkscape-font-specification:'Arial, Normal';font-stretch:normal;font-variant:normal;text-anchor:start;text-align:start;writing-mode:lr;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal"><flowRegion
+         id="flowRegion4654"><rect
+           id="rect4656"
+           width="321.07144"
+           height="156.07143"
+           x="6.7857141"
+           y="475.64285" /></flowRegion><flowPara
+         id="flowPara4658"></flowPara></flowRoot>    <g
+       id="g6091"
+       transform="translate(0,-0.0218524)">
+      <rect
+         y="5.145052"
+         x="0.38760972"
+         height="1.2485927"
+         width="2.8185339"
+         id="rect3731"
+         style="fill:none;stroke:#000000;stroke-width:0.02140757;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         id="text4560"
+         y="5.4791689"
+         x="0.94157064"
+         style="font-style:normal;font-weight:normal;font-size:0.41666681px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.01041667"
+         xml:space="preserve"><tspan
+           id="tspan4564"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.27777779px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.01041667"
+           y="5.4791689"
+           x="0.94157064"
+           sodipodi:role="line">Visplay Client</tspan></text>
+      <g
+         transform="translate(-0.02232091,1.6000365)"
+         id="g4676">
+        <rect
+           style="fill:none;stroke:#000000;stroke-width:0.02000001;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect4587-3"
+           width="1.026786"
+           height="0.58035731"
+           x="0.62499988"
+           y="4.0952377" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.27777785px;line-height:1.25;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.01041667"
+           x="0.74227464"
+           y="4.421495"
+           id="text4610"><tspan
+             sodipodi:role="line"
+             id="tspan4608"
+             x="0.74227464"
+             y="4.421495"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.1388889px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.01041667">libvisplaygui</tspan></text>
+      </g>
+      <g
+         transform="translate(-0.02232143,1.5922604)"
+         id="g4671">
+        <rect
+           style="fill:none;stroke:#000000;stroke-width:0.02000001;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect4587"
+           width="1.026786"
+           height="0.58035731"
+           x="1.9717268"
+           y="4.1101217" />
+        <g
+           id="g4646"
+           transform="translate(0.00375696,-0.03973557)">
+          <text
+             id="text4610-2"
+             y="4.4060278"
+             x="2.4870255"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.27777785px;line-height:1.25;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.01041667"
+             xml:space="preserve"><tspan
+               id="tspan4634"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.1388889px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;stroke-width:0.01041667"
+               y="4.4060278"
+               x="2.4870255"
+               sodipodi:role="line">visplay data</tspan></text>
+          <text
+             id="text4640"
+             y="4.5462012"
+             x="2.2094851"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.27777785px;line-height:1.25;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.01041667"
+             xml:space="preserve"><tspan
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.1388889px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.01041667"
+               y="4.5462012"
+               x="2.2094851"
+               id="tspan4638"
+               sodipodi:role="line">protocol</tspan></text>
+        </g>
+      </g>
+      <g
+         transform="translate(-0.05357093,1.6052616)"
+         id="g4663">
+        <rect
+           style="fill:none;stroke:#000000;stroke-width:0.01645511;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect4589"
+           width="1.8264623"
+           height="0.94476557"
+           x="0.92084688"
+           y="5.4067116" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.27777785px;line-height:1.25;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.01041667"
+           x="1.5127618"
+           y="6.0773907"
+           id="text4650"><tspan
+             sodipodi:role="line"
+             id="tspan4648"
+             x="1.5127618"
+             y="6.0773907"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.55555558px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.01041667">TV</tspan></text>
+      </g>
+      <path
+         inkscape:connector-curvature="0"
+         id="path4678"
+         d="M 1.1355569,6.3052167 V 6.7683888 H 1.7803697 V 6.9912684"
+         style="fill:none;stroke:#000000;stroke-width:0.01008781px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Lstart);marker-end:url(#Arrow1Lend)" />
+    </g>
+    <g
+       id="g6341"
+       transform="translate(0.41573779,-0.01860127)">
+      <rect
+         y="2.7566562"
+         x="1.745495"
+         height="1.2485927"
+         width="2.8185339"
+         id="rect3731-9"
+         style="fill:none;stroke:#000000;stroke-width:0.02140757;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         id="text4560-9"
+         y="3.0907731"
+         x="2.1936617"
+         style="font-style:normal;font-weight:normal;font-size:0.41666684px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.01041667"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.27777779px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.01041667"
+           y="3.0907731"
+           x="2.1936617"
+           sodipodi:role="line"
+           id="tspan11912">HTTP(S) Server</tspan></text>
+    </g>
+    <g
+       transform="translate(3.5472459,-0.02185241)"
+       id="g6091-8">
+      <rect
+         y="5.145052"
+         x="0.38760972"
+         height="1.2485927"
+         width="2.8185339"
+         id="rect3731-8"
+         style="fill:none;stroke:#000000;stroke-width:0.02140757;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         id="text4560-0"
+         y="5.4791689"
+         x="0.94157064"
+         style="font-style:normal;font-weight:normal;font-size:0.41666681px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.01041667"
+         xml:space="preserve"><tspan
+           id="tspan4564-3"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.27777779px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.01041667"
+           y="5.4791689"
+           x="0.94157064"
+           sodipodi:role="line">Visplay Client</tspan></text>
+      <g
+         transform="translate(-0.02232091,1.6000365)"
+         id="g4676-7">
+        <rect
+           style="fill:none;stroke:#000000;stroke-width:0.02000001;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect4587-3-0"
+           width="1.026786"
+           height="0.58035731"
+           x="0.62499988"
+           y="4.0952377" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.27777785px;line-height:1.25;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.01041667"
+           x="0.74227464"
+           y="4.421495"
+           id="text4610-6"><tspan
+             sodipodi:role="line"
+             id="tspan4608-9"
+             x="0.74227464"
+             y="4.421495"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.1388889px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.01041667">libvisplaygui</tspan></text>
+      </g>
+      <g
+         transform="translate(-0.02232143,1.5922604)"
+         id="g4671-2">
+        <rect
+           style="fill:none;stroke:#000000;stroke-width:0.02000001;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect4587-1"
+           width="1.026786"
+           height="0.58035731"
+           x="1.9717268"
+           y="4.1101217" />
+        <g
+           id="g4646-7"
+           transform="translate(0.00375696,-0.03973557)">
+          <text
+             id="text4610-2-7"
+             y="4.4060278"
+             x="2.4870255"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.27777785px;line-height:1.25;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.01041667"
+             xml:space="preserve"><tspan
+               id="tspan4634-9"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.1388889px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;stroke-width:0.01041667"
+               y="4.4060278"
+               x="2.4870255"
+               sodipodi:role="line">visplay data</tspan></text>
+          <text
+             id="text4640-7"
+             y="4.5462012"
+             x="2.2094851"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.27777785px;line-height:1.25;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.01041667"
+             xml:space="preserve"><tspan
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.1388889px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.01041667"
+               y="4.5462012"
+               x="2.2094851"
+               id="tspan4638-6"
+               sodipodi:role="line">protocol</tspan></text>
+        </g>
+      </g>
+      <g
+         transform="translate(-0.05357093,1.6052616)"
+         id="g4663-2">
+        <rect
+           style="fill:none;stroke:#000000;stroke-width:0.01645511;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect4589-7"
+           width="1.8264623"
+           height="0.94476557"
+           x="0.92084688"
+           y="5.4067116" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.27777785px;line-height:1.25;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.01041667"
+           x="1.5127618"
+           y="6.0773907"
+           id="text4650-1"><tspan
+             sodipodi:role="line"
+             id="tspan4648-5"
+             x="1.5127618"
+             y="6.0773907"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.55555558px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.01041667">TV</tspan></text>
+      </g>
+      <path
+         inkscape:connector-curvature="0"
+         id="path4678-8"
+         d="M 1.1355569,6.3052167 V 6.7683888 H 1.7803697 V 6.9912684"
+         style="fill:none;stroke:#000000;stroke-width:0.01008781px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Lstart-9);marker-end:url(#Arrow1Lend-8)" />
+    </g>
+    <g
+       transform="translate(7.0944924,-0.0218524)"
+       id="g6091-5">
+      <rect
+         y="5.145052"
+         x="0.38760972"
+         height="1.2485927"
+         width="2.8185339"
+         id="rect3731-6"
+         style="fill:none;stroke:#000000;stroke-width:0.02140757;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         id="text4560-8"
+         y="5.4791689"
+         x="0.94157064"
+         style="font-style:normal;font-weight:normal;font-size:0.41666681px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.01041667"
+         xml:space="preserve"><tspan
+           id="tspan4564-4"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.27777779px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.01041667"
+           y="5.4791689"
+           x="0.94157064"
+           sodipodi:role="line">Visplay Client</tspan></text>
+      <g
+         transform="translate(-0.02232091,1.6000365)"
+         id="g4676-8">
+        <rect
+           style="fill:none;stroke:#000000;stroke-width:0.02000001;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect4587-3-8"
+           width="1.026786"
+           height="0.58035731"
+           x="0.62499988"
+           y="4.0952377" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.27777785px;line-height:1.25;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.01041667"
+           x="0.74227464"
+           y="4.421495"
+           id="text4610-3"><tspan
+             sodipodi:role="line"
+             id="tspan4608-8"
+             x="0.74227464"
+             y="4.421495"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.1388889px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.01041667">libvisplaygui</tspan></text>
+      </g>
+      <g
+         transform="translate(-0.02232143,1.5922604)"
+         id="g4671-7">
+        <rect
+           style="fill:none;stroke:#000000;stroke-width:0.02000001;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect4587-5"
+           width="1.026786"
+           height="0.58035731"
+           x="1.9717268"
+           y="4.1101217" />
+        <g
+           id="g4646-2"
+           transform="translate(0.00375696,-0.03973557)">
+          <text
+             id="text4610-2-4"
+             y="4.4060278"
+             x="2.4870255"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.27777785px;line-height:1.25;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.01041667"
+             xml:space="preserve"><tspan
+               id="tspan4634-5"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.1388889px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;stroke-width:0.01041667"
+               y="4.4060278"
+               x="2.4870255"
+               sodipodi:role="line">visplay data</tspan></text>
+          <text
+             id="text4640-0"
+             y="4.5462012"
+             x="2.2094851"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.27777785px;line-height:1.25;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.01041667"
+             xml:space="preserve"><tspan
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.1388889px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.01041667"
+               y="4.5462012"
+               x="2.2094851"
+               id="tspan4638-5"
+               sodipodi:role="line">protocol</tspan></text>
+        </g>
+      </g>
+      <g
+         transform="translate(-0.05357093,1.6052616)"
+         id="g4663-7">
+        <rect
+           style="fill:none;stroke:#000000;stroke-width:0.01645511;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect4589-3"
+           width="1.8264623"
+           height="0.94476557"
+           x="0.92084688"
+           y="5.4067116" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.27777785px;line-height:1.25;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.01041667"
+           x="1.5127618"
+           y="6.0773907"
+           id="text4650-2"><tspan
+             sodipodi:role="line"
+             id="tspan4648-7"
+             x="1.5127618"
+             y="6.0773907"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.55555558px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.01041667">TV</tspan></text>
+      </g>
+      <path
+         inkscape:connector-curvature="0"
+         id="path4678-2"
+         d="M 1.1355569,6.3052167 V 6.7683888 H 1.7803697 V 6.9912684"
+         style="fill:none;stroke:#000000;stroke-width:0.01008781px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Lstart-8);marker-end:url(#Arrow1Lend-5)" />
+    </g>
+    <g
+       transform="translate(3.9629838,-0.01860127)"
+       id="g6341-1">
+      <rect
+         y="2.7566562"
+         x="1.745495"
+         height="1.2485927"
+         width="2.8185339"
+         id="rect3731-9-2"
+         style="fill:none;stroke:#000000;stroke-width:0.02140757;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         id="text4560-9-2"
+         y="3.0907731"
+         x="2.2994559"
+         style="font-style:normal;font-weight:normal;font-size:0.41666684px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.01041667"
+         xml:space="preserve"><tspan
+           id="tspan4564-6-1"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.27777779px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.01041667"
+           y="3.0907731"
+           x="2.2994559"
+           sodipodi:role="line">Visplay Server</tspan></text>
+      <g
+         transform="translate(1.3563971,-0.79613552)"
+         id="g4671-9-6">
+        <rect
+           style="fill:none;stroke:#000000;stroke-width:0.02000001;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect4587-0-2"
+           width="1.026786"
+           height="0.58035731"
+           x="1.9717268"
+           y="4.1101217" />
+        <g
+           id="g4646-8-0"
+           transform="translate(0.00375696,-0.03973557)">
+          <text
+             id="text4610-2-9-2"
+             y="4.4060278"
+             x="2.4870255"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.27777785px;line-height:1.25;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.01041667"
+             xml:space="preserve"><tspan
+               id="tspan4634-3-2"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.1388889px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;stroke-width:0.01041667"
+               y="4.4060278"
+               x="2.4870255"
+               sodipodi:role="line">visplay data</tspan></text>
+          <text
+             id="text4640-1-9"
+             y="4.5462012"
+             x="2.2094851"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.27777785px;line-height:1.25;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.01041667"
+             xml:space="preserve"><tspan
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.1388889px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.01041667"
+               y="4.5462012"
+               x="2.2094851"
+               id="tspan4638-4-7"
+               sodipodi:role="line">protocol</tspan></text>
+        </g>
+      </g>
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.01119339px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker6520);marker-end:url(#marker8168)"
+       d="m 3.5780396,3.9985132 v 0.6740876 h -1.121851 v 1.00002"
+       id="path8212"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.01119339px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker6520-4);marker-end:url(#marker8168-5)"
+       d="M 7.1451072,4.0005343 V 4.6746219 H 6.0232563 v 1.00002"
+       id="path8212-1"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.01041667px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11733);marker-end:url(#marker6666)"
+       d="M 6.0232582,5.6746437 V 4.6746234 H 3.8616084 V 3.9910727"
+       id="path11723"
+       inkscape:connector-curvature="0" />
+    <g
+       transform="translate(5.327381,-2.3065478)"
+       id="g6341-1-9">
+      <rect
+         y="2.7566562"
+         x="1.745495"
+         height="1.2485927"
+         width="2.8185339"
+         id="rect3731-9-2-8"
+         style="fill:none;stroke:#000000;stroke-width:0.02140757;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         id="text4560-9-2-1"
+         y="3.0907731"
+         x="2.2994559"
+         style="font-style:normal;font-weight:normal;font-size:0.41666684px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.01041667"
+         xml:space="preserve"><tspan
+           id="tspan4564-6-1-0"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.27777779px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.01041667"
+           y="3.0907731"
+           x="2.2994559"
+           sodipodi:role="line">Visplay Server</tspan></text>
+      <g
+         transform="translate(1.3563971,-0.79613552)"
+         id="g4671-9-6-7">
+        <rect
+           style="fill:none;stroke:#000000;stroke-width:0.02000001;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect4587-0-2-6"
+           width="1.026786"
+           height="0.58035731"
+           x="1.9717268"
+           y="4.1101217" />
+        <g
+           id="g4646-8-0-0"
+           transform="translate(0.00375696,-0.03973557)">
+          <text
+             id="text4610-2-9-2-1"
+             y="4.4060278"
+             x="2.4870255"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.27777785px;line-height:1.25;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.01041667"
+             xml:space="preserve"><tspan
+               id="tspan4634-3-2-0"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.1388889px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;stroke-width:0.01041667"
+               y="4.4060278"
+               x="2.4870255"
+               sodipodi:role="line">visplay data</tspan></text>
+          <text
+             id="text4640-1-9-2"
+             y="4.5462012"
+             x="2.2094851"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.27777785px;line-height:1.25;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.01041667"
+             xml:space="preserve"><tspan
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.1388889px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.01041667"
+               y="4.5462012"
+               x="2.2094851"
+               id="tspan4638-4-7-5"
+               sodipodi:role="line">protocol</tspan></text>
+        </g>
+      </g>
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.01026546px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11930);marker-end:url(#marker12066)"
+       d="M 7.8196678,3.2740154 V 2.3281657 H 8.5047422 V 1.7216666"
+       id="path11920"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>

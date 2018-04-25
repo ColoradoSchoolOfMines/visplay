@@ -1,7 +1,7 @@
 Project Organization
 ====================
 
-.. TODO: architecture diagram
+.. image:: diagrams/architecture.png
 
 .. TODO: describe components of the architecture
 

@@ -2,6 +2,8 @@
 
 .pytest_cache
 docs/api/
+docs/diagrams/*.pdf
+docs/diagrams/*.png
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
