@@ -1,6 +1,6 @@
 .. Visplay documentation master file, created by
    sphinx-quickstart on Wed Apr 11 12:32:34 2018.
-   You can adapt this file completely to your liking, but it should at least
+   You can adapt this file comp`letely to your liking, but it should at least
    contain the root `toctree` directive.
 
 Welcome to Visplay's documentation!
@@ -25,6 +25,7 @@ Contents
    config-layout.rst
    project-organization.rst
    api/visplay.rst
+   data.rst
 
 Indices and tables
 ==================
