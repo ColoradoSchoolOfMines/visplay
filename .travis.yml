@@ -7,10 +7,17 @@ addons:
       - sourceline: 'ppa:mc3man/mpv-tests'
     packages:
       - mpv
+      - inkscape
 install:
   - pip install --upgrade pip
   - pip install .
 script:
+  # Render the diagrams
+  - pushd docs/diagrams
+  - make
+  - popd
+
+  # Make the Sphinx documentation
   - make doctest
   - make coverage
   - make html
