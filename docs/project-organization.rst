@@ -13,21 +13,20 @@ architecture are described below the diagram.
 
 **Visplay Server**
 
-  Is a server
+  .. TODO
 
 **Visplay Client**
 
-  Client
+  .. TODO
 
 **libvisplaygui**
 
-  Libvisplaygui
+  .. TODO
+
 
 **HTTP(S) Server**
 
-  Libvisplaygui
-
-.. TODO describe components of the architecture
+  .. TODO
 
 Protocols
 ---------
