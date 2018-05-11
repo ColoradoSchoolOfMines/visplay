@@ -1,13 +1,13 @@
+sudo: required
+
 language: python
-python: 3.6
-cache: pip
-addons:
-  apt:
-    sources:
-      - sourceline: 'ppa:mc3man/mpv-tests'
-    packages:
-      - mpv
-      - inkscape
+
+services:
+  - docker
+
+before_install:
+  - docker pull
+
 install:
   - pip install --upgrade pip
   - pip install .
