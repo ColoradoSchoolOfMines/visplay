@@ -89,10 +89,10 @@ class Config(metaclass=Singleton):
         default_playlists = path.join(cls._config_folder, 'playlists.yaml')
 
         # Create the config file if it does not exist.
-        if not path.exists(cls._default_config):
-            with open(cls._default_config, 'w+') as f:
+        if not path.exists(cls.default_config):
+            with open(cls.default_config, 'w+') as f:
                 f.write(f'sources: {default_sources}\n')
-            print(f'File {cls._default_config} created')
+            print(f'File {cls.default_config} created')
 
         # Create the sources file if it does not exist.
         if not path.exists(default_sources):

@@ -53,13 +53,13 @@ def main():
         help='Specify a custom configuration file to load.',
     )
 
-    # Get the arguments
-    args = parser.parse_args()
-
     # Keep trying to load the configuration until it either explodes
     # spectacularly or works.
     while True:
         try:
+            # Get the arguments
+            args = parser.parse_args()
+
             Config.load_from_yaml(args.config)
         except Exception as e:
             print(f'There was an error getting the configuration:\n\t{e}\n')

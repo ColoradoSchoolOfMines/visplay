@@ -78,25 +78,50 @@ class IPFSSource(Source):
             ipfs_config = Config.get('ipfs_config')
             ipfs_api = ipfs.connect(
                 host=ipfs_config.get('host'),
-                port=ipfs_config.get('port'),
+                port=ipfs_config.get('port', 8080),
             )
         except exceptions.ConnectionError as e:
-            raise ConnectionError(f'Could not connect to IPFS.') from e
+            raise ConnectionError('Could not connect to IPFS.') from e
+        except AttributeError as e:
+            raise KeyError('Incomplete ipfs_config not found in configuration file.') from e
 
         try:
             file_info = ipfs_api.ls(uri.path)
 
+            # if file_path.suffix == '.yaml':
+            #     if self.is_import and '.sources' in file_path.suffixes:
+            #         with open(file_path) as source_file:
+            #             # Recursively discover all sources
+            #             sources, assets = self._from_stream(name, source_file)
+            #             self.sources += sources
+            #             self.assets.update(assets)
+            #     else:
+            #         self.assets.update(get_local_yaml(file_path))
+            # else:
+            #     self.assets[file_path.name] = str(file_path)
+
             for obj in file_info.get('Objects'):
-                print(obj)
                 if len(obj.get('Links', [])) > 0:
+                    # Handle directories
+                    print(f"IPFS Object {obj['Hash']} is a directory")
                     for link in obj['Links']:
-                        print(link)
-                    # directory
-                    pass
+                        name = link['Name']
+                        path = Path(name)
+                        if path.suffix == '.yaml':
+                            file = ipfs_api.cat(link['Hash']).decode()
+                            if self.is_import and '.sources' in path.suffixes:
+                                # Recursively discover the sources
+                                sources, assets = self._from_stream(
+                                    name, file)
+                                self.sources += sources
+                                self.assets.update(assets)
+                            else:
+                                self.assets.update(yaml.load(file))
+                        else:
+                            self.assets[name] = f"/ipfs/{link['Hash']}"
                 else:
                     # file
-                    file = ipfs_api.cat(uri.path).decode()
-                    print(file)
+                    self.assets[obj['Hash']] = str(uri)
         except exceptions.Error as e:
             print(e)
 
