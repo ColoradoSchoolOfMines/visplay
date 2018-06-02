@@ -31,6 +31,7 @@ setup(
         'prompt',
         'ipfsapi',
         'sphinx',
+        'bottle',
     ],
     zip_safe=False,
 

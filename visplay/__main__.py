@@ -5,6 +5,7 @@ from threading import Thread
 from time import sleep
 
 import prompt
+from bottle import run
 
 import libvisplaygui
 from visplay import media
@@ -52,6 +53,16 @@ def main():
         default=Config.default_config,
         help='Specify a custom configuration file to load.',
     )
+    parser.add_argument(
+        '--server',
+        action='store_true',
+        help='Run Visplay as a server.',
+    )
+    parser.add_argument(
+        '--debug',
+        action='store_true',
+        help='Run server in debug mode.',
+    )
 
     # Get the arguments
     args = parser.parse_args()
@@ -81,7 +92,7 @@ def main():
     # There are multiple threads so this allows them to communicate
     messages = Queue()
 
-    if Config.get('libvisplaygui'):
+    if not args.server and Config.get('libvisplaygui'):
         gui_thread = Thread(target=libvisplaygui.init_gui)
         gui_thread.daemon = True
         gui_thread.start()
@@ -92,6 +103,13 @@ def main():
 
     with open(Config.sources) as source_file:
         sources = get_sources_list(source_file)
+
+    if args.server:
+        print('Starting visplay server')
+        import visplay.server
+        visplay.server.server.initialize(sources)
+        run(host='localhost', port=8081, debug=args.debug)
+    else:  # Run as a client
         media.find_and_play(
             messages,
             playable_generator(sources, messages),

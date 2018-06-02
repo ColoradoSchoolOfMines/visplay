@@ -1,18 +1,14 @@
 import os
 from pathlib import Path
 
-import ipfsapi as ipfs
 import requests
 import uri
 import yaml
-from ipfsapi import exceptions
 
 from visplay.setup_sources import get_sources_list, sources_to_asset
 
 # Every source needs to say whether the files it gets survive after an error,
 # how to get an asset file, and how to get a playlist file.
-
-# ipfs_api = ipfs.connect(host='127.0.0.1', port=8080)
 
 
 def get_local_yaml(yaml_path):
@@ -55,25 +51,11 @@ class HTTPSource(Source):
                     self.assets = sources_to_asset(name, self.sources)
                     self.layout = None
             else:
-                with requests.get(uri.path, verify=False) as remote_file:
+                with requests.get(uri.base, verify=False) as remote_file:
                     self.assets = yaml.load(remote_file.content)
 
         except ConnectionError:
             return {'error': 'URL not available'}
-
-
-class IPFSSource(Source):
-    """Allow users to specify an IPFS hash as a source.
-
-    If the source
-    """
-
-    def __init__(self, name, uri: uri.URI, is_import=False):
-        super().__init__(name, uri, is_import=is_import)
-        try:
-            print(ipfs_api.cat(uri.path))
-        except exceptions.Error as e:
-            print(e)
 
 
 class PathSource(Source):
@@ -118,6 +100,5 @@ source_constructors = {
     'file': PathSource,
     'http': HTTPSource,
     'https': HTTPSource,
-    'ipfs': IPFSSource,
     'path': PathSource,
 }
