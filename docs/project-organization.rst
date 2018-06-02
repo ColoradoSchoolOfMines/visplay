@@ -15,14 +15,17 @@ architecture are described below the diagram.
 
   .. TODO
 
+  This doesn't exist yet. It will consist of the data protocol
+
 **Visplay Client**
 
   .. TODO
 
 **libvisplaygui**
 
-  .. TODO
-
+  This is a library which interfaces directly with the hardware to display
+  content to consumers. The goal of this library is to abstract the hardware
+  details away from the client.
 
 **HTTP(S) Server**
 
