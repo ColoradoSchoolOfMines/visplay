@@ -1,0 +1,7 @@
+visplay.media module
+====================
+
+.. automodule:: visplay.media
+    :members:
+    :undoc-members:
+    :show-inheritance:

@@ -1,0 +1,141 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Project Organization &#8212; Visplay  documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="visplay package" href="api/visplay.html" />
+    <link rel="prev" title="Yaml Configuration Layout" href="config-layout.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="api/visplay.html" title="visplay package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="config-layout.html" title="Yaml Configuration Layout"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Visplay  documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="project-organization">
+<h1>Project Organization<a class="headerlink" href="#project-organization" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="architecture-diagram">
+<h2>Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Permalink to this headline">¶</a></h2>
+<p>Here is a diagram of the Visplay architecture. Each of the components of this
+architecture are described below the diagram.</p>
+<a class="reference internal image-reference" href="_images/architecture.png"><img alt="_images/architecture.png" class="align-center" src="_images/architecture.png" style="width: 495.0px; height: 382.5px;" /></a>
+<p><strong>Visplay Server</strong></p>
+<blockquote>
+<div>This doesn’t exist yet. It will expose assets/playlists/sources over HTTP.</div></blockquote>
+<p><strong>Visplay Client</strong></p>
+<blockquote>
+<div>The Visplay client is run on the device controlling the TV. It uses
+<code class="docutils literal notranslate"><span class="pre">libvisplaygui</span></code> to interface with the display, and optionally communicates
+with Visplay servers, normal HTTP(S) servers, or even IPFS to get
+asset/playlist/sources information.</div></blockquote>
+<p><strong>libvisplaygui</strong></p>
+<blockquote>
+<div>This is a library which interfaces directly with the hardware to display
+content to consumers. The goal of this library is to abstract the hardware
+details away from the client.</div></blockquote>
+<p><strong>HTTP(S) Server</strong></p>
+<blockquote>
+<div>This is a placeholder for any potential asset source. In reality, we are not
+restricted to HTTP(S). In fact, we have already implemented IPFS and we could
+implement FTP or some other protocol fairly trivially.</div></blockquote>
+</div>
+<div class="section" id="protocols">
+<h2>Protocols<a class="headerlink" href="#protocols" title="Permalink to this headline">¶</a></h2>
+<p>There are two main protocols that Visplay is built around: the data protocol and
+the display protocol.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Project Organization</a><ul>
+<li><a class="reference internal" href="#architecture-diagram">Architecture Diagram</a></li>
+<li><a class="reference internal" href="#protocols">Protocols</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="config-layout.html"
+                        title="previous chapter">Yaml Configuration Layout</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="api/visplay.html"
+                        title="next chapter">visplay package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/project-organization.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="api/visplay.html" title="visplay package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="config-layout.html" title="Yaml Configuration Layout"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Visplay  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Mines ACM.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,7 @@
+visplay.setup\_sources module
+=============================
+
+.. automodule:: visplay.setup_sources
+    :members:
+    :undoc-members:
+    :show-inheritance:

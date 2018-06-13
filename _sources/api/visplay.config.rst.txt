@@ -1,0 +1,7 @@
+visplay.config module
+=====================
+
+.. automodule:: visplay.config
+    :members:
+    :undoc-members:
+    :show-inheritance:

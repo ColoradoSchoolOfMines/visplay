@@ -1,0 +1,21 @@
+visplay package
+===============
+
+Submodules
+----------
+
+.. toctree::
+
+   visplay.config
+   visplay.media
+   visplay.qt_test
+   visplay.setup_sources
+   visplay.sources
+
+Module contents
+---------------
+
+.. automodule:: visplay
+    :members:
+    :undoc-members:
+    :show-inheritance:

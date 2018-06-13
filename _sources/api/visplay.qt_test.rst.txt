@@ -1,0 +1,7 @@
+visplay.qt\_test module
+=======================
+
+.. automodule:: visplay.qt_test
+    :members:
+    :undoc-members:
+    :show-inheritance:
