@@ -1,7 +1,7 @@
 """Main entrypoint for Visplay."""
 from argparse import ArgumentParser
 from queue import Queue
-from threading import Thread
+import threading
 from time import sleep
 
 import prompt
@@ -10,6 +10,14 @@ import libvisplaygui
 from visplay import media
 from visplay.config import Config
 from visplay.setup_sources import get_sources_list
+
+
+barrier = threading.Barrier(2)
+
+
+def visplaygui_init_callback():
+    """Callback to be passed into libvisplaygui for synchronization"""
+    barrier.wait()
 
 
 def playable_generator(sources, messages):
@@ -82,10 +90,12 @@ def main():
     messages = Queue()
 
     if Config.get('libvisplaygui'):
-        gui_thread = Thread(target=libvisplaygui.init_gui)
+        gui_thread = threading.Thread(target=libvisplaygui.init_gui,
+                                      args=[visplaygui_init_callback])
         gui_thread.daemon = True
         gui_thread.start()
-        sleep(2)
+        # Wait for libvisplaygui to initialize
+        barrier.wait()
 
     if not Config.get('sources'):
         raise KeyError('No sources found in configuration file.')

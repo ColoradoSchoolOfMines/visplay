@@ -11,4 +11,4 @@ if [ "$1" == "distclean" ]; then
 fi
 
 qmake-qt5 ../visplay-gui.pro
-make
+make -j5

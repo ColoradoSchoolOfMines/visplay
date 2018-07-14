@@ -39,11 +39,15 @@ VisplayGui::~VisplayGui() {
 
 }
 
-void VisplayGui::display_gui()
+PyThreadState* VisplayGui::display_gui(PyObject *callback, PyThreadState *m_thread_state)
 {
     win->show();
-    ready_latch->count_down();
+    PyEval_RestoreThread(m_thread_state);
+    m_thread_state = NULL;
+    boost::python::call<void>(callback);
+    m_thread_state = PyEval_SaveThread();
     app->exec();
+    return m_thread_state;
 }
 
 void VisplayGui::open_media(std::string file_path)

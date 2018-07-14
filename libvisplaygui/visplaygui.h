@@ -29,7 +29,8 @@ class Q_DECL_EXPORT VisplayGui : public QObject
     public:
         VisplayGui(int argc, char *argv[]);
         ~VisplayGui();
-        void display_gui();
+        PyThreadState* display_gui(PyObject* callback, PyThreadState* m_thread_state);
+
         int argcc = 1;
         char *argvv[1] = {(char*)"test"};
 
@@ -45,7 +46,6 @@ class Q_DECL_EXPORT VisplayGui : public QObject
         QPointer<QVBoxLayout>       vl;
 
         boost::latch               *playback_latch;
-        boost::latch               *ready_latch;
 
     public Q_SLOTS:
         void open_media(std::string file_path);

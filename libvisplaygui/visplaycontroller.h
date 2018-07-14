@@ -9,9 +9,7 @@ class VisplayController : public QObject
     Q_OBJECT
 public:
     explicit VisplayController(QObject *parent = nullptr);
-    bool ready_status;
     boost::latch *playback_latch;
-    boost::latch *ready_latch;
 
 
 Q_SIGNALS:
